@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin – Mana Vinayaka Youth</title>
+<style>
+body{margin:0;background:#120306;color:#fff;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:40px auto;padding:20px}.card{background:#21080d;border:1px solid #8d5b00;border-radius:18px;padding:25px;margin-bottom:20px}h1,h2{color:#ffd76a}input,button{width:100%;padding:13px;margin:7px 0;border-radius:9px;border:1px solid #8d5b00;box-sizing:border-box}input{background:#16070b;color:#fff}button{background:#ffc400;color:#190006;font-weight:900;cursor:pointer}.secondary{background:transparent;color:#fff}.hidden{display:none}.status{color:#ffd76a;margin-top:10px}.back{color:#ffd76a;text-decoration:none}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.row{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<a class="back" href="index.html">← Back to website</a>
+<div class="card"><h1>🙏 2026 Gallery Admin</h1><p>Only the authorised Supabase account can upload.</p>
+<form id="login"><input id="email" type="email" placeholder="Admin email" required><input id="password" type="password" placeholder="Password" required><button>Login</button></form>
+<button id="logout" class="secondary hidden">Logout</button><div id="who" class="status"></div></div>
+<div id="panel" class="card hidden"><h2>Upload 2026 Photo / Video</h2><input id="file" type="file" accept="image/*,video/*" required><input id="title" placeholder="Title (optional)"><button id="upload">Upload to Gallery</button><div id="status" class="status"></div><hr style="border-color:#633d00"><h2>Uploaded files</h2><div id="files"></div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script>
+<script>
+const sb=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);const $=id=>document.getElementById(id);
+async function refresh(){const {data:{session}}=await sb.auth.getSession();const ok=session?.user?.id===window.ADMIN_UID; $('login').classList.toggle('hidden',!!session);$('logout').classList.toggle('hidden',!session);$('panel').classList.toggle('hidden',!ok);$('who').textContent=session?(ok?'Admin authenticated.':'This account is not authorised.'):'Please login.';if(ok) list();}
+$('login').onsubmit=async e=>{e.preventDefault();$('who').textContent='Logging in…';const {error}=await sb.auth.signInWithPassword({email:$('email').value,password:$('password').value});$('who').textContent=error?error.message:'';await refresh();};
+$('logout').onclick=async()=>{await sb.auth.signOut();await refresh();};
+$('upload').onclick=async()=>{const f=$('file').files[0];if(!f)return;$('status').textContent='Uploading…';const safe=(f.name||'file').replace(/[^a-zA-Z0-9._-]/g,'_');const stamp=new Date().toISOString().replace(/[:.]/g,'-');const path=`2026-${stamp}-${safe}`;const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type,upsert:false});$('status').textContent=error?error.message:'Uploaded successfully ✅';if(!error){$('file').value='';$('title').value='';list();}};
+async function list(){const {data,error}=await sb.storage.from('gallery').list('',{limit:200,sortBy:{column:'created_at',order:'desc'}});$('files').innerHTML=error?'<p>'+error.message+'</p>':(data||[]).map(x=>`<p>${x.name}</p>`).join('');}
+sb.auth.onAuthStateChange(()=>refresh());refresh();
+</script></body></html>

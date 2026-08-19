@@ -1,0 +1,15 @@
+MANA VINAYAKA YOUTH – 2026 GALLERY ADMIN SETUP
+
+1. Supabase > Project Settings > API: copy Project URL and anon/public key.
+2. Open config.js and replace YOUR-PROJECT-REF and PASTE-YOUR-ANON-PUBLIC-KEY-HERE.
+3. Keep ADMIN_UID as the authorised user's UUID if it matches your INSERT policy.
+4. In Storage > Policies for gallery, create a SELECT policy for public visitors if website listing returns a permission error:
+   Policy name: Public Gallery List
+   Operation: SELECT
+   Target role: anon, authenticated
+   Definition: bucket_id = 'gallery'
+5. Your existing INSERT policy should remain restricted to the admin UID.
+6. Deploy index.html, config.js, gallery.js, admin.html and your existing image assets to GitHub Pages.
+7. Open /admin.html. Login using the email/password of the Supabase Auth admin account. The site does NOT put a password in JavaScript.
+
+IMPORTANT: Never put a Supabase service_role/secret key in GitHub Pages. Only the anon/public key belongs in config.js.
