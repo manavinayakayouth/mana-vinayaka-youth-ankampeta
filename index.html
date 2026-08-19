@@ -36,6 +36,10 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:50;padding:30px;overflow:auto}.modal-box{max-width:900px;margin:30px auto;background:#1d080e;border:1px solid var(--gold);border-radius:16px;padding:22px;position:relative}.close{position:absolute;right:15px;top:10px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer}.modal-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.modal-gallery img{width:100%;height:240px;object-fit:cover;border-radius:8px}
 @media(max-width:900px){nav{display:none}.grid6{grid-template-columns:repeat(3,1fr)}.gallery{grid-template-columns:1fr 1fr}.events,.about-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.hero{min-height:610px}.grid6{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.photo-card img{height:380px}.modal-gallery{grid-template-columns:1fr}.modal-gallery img{height:auto}.panel > div[style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr !important}.hero-content{padding-top:75px}}
+
+.bell-button{position:fixed;right:18px;bottom:18px;z-index:40;width:58px;height:58px;border-radius:50%;border:1px solid var(--gold);background:linear-gradient(145deg,#7b001f,#2a0710);color:#ffd76a;font-size:1.75rem;cursor:pointer;box-shadow:0 6px 25px rgba(0,0,0,.45);transition:.2s}
+.bell-button:hover{transform:scale(1.08)}.bell-button.ringing{animation:bellRing .55s ease-in-out}
+@keyframes bellRing{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(10deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(5deg)}}
 </style>
 </head>
 <body>
@@ -43,7 +47,7 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
   <div class="container nav">
     <a class="logo" href="#home" style="display:flex;align-items:center;gap:12px">
 <img src="mana-vinayaka-youth-logo.png" alt="Mana Vinayaka Youth Logo" style="width:58px;height:58px;object-fit:contain;border-radius:50%">
-<span>MANA VINAYAKA YOUTH<small>PALTHERU • ANKAMPETA</small></span>
+<span>MANA VINAYAKA YOUTH<small><a href="https://goo.gl/maps/uHPVRMFwndM4RxESA" target="_blank" rel="noopener" style="color:inherit">PALTHERU • ANKAMPETA 📍</a></small></span>
 </a>
     <nav>
       <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#events">EVENTS</a><a href="#gallery">GALLERY</a><a href="#contact">CONTACT</a>
@@ -91,8 +95,8 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 <div class="title"><small>📅 FESTIVAL PROGRAMS</small><h2>Upcoming Events</h2><p>2026 donor information added. Exact event dates can be updated later.</p></div>
 <div class="events">
 <div class="panel" id="eventList">
-  <div class="event"><div class="date"><b>🐘</b>2026</div><div><h3>2026 Vigraham</h3><p>Donated by <strong>Pedakapu Siva &amp; Pedakapu Satish</strong></p></div></div>
-  <div class="event"><div class="date"><b>🪔</b>2026</div><div><h3>2026 Puja Items</h3><p>Donated by <strong>Eripilli Surya Govindu Garu</strong></p></div></div>
+  <div class="event"><div class="date"><b>🐘</b>2026</div><div><h3>2026 Vigraham</h3><p>2026 Festival Contribution</p></div></div>
+  <div class="event"><div class="date"><b>🪔</b>2026</div><div><h3>2026 Puja Items</h3><p>2026 Festival Contribution</p></div></div>
   <div class="event"><div class="date"><b>🙏</b></div><div><h3>Upcoming Programs</h3><p>Festival programs and exact dates will be announced here later.</p></div></div>
 </div>
 <div class="panel">
@@ -105,7 +109,7 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
   <div class="panel">
     <h2 style="text-align:center;color:#ffd76a;margin-bottom:18px">🙏 2026 Donors</h2>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
-      <div class="photo-card"><img src="2026-vigraham-donor.png" alt="2026 Vigraham donor" style="height:320px;object-fit:contain;background:#120306"><div class="caption"><h3>🐘 2026 Vigraham</h3><p>Pedakapu Siva &amp; Pedakapu Satish</p></div></div>
+      <div class="photo-card"><img src="2026-vigraham-donor.png" alt="2026 Vigraham donor" style="height:320px;object-fit:contain;background:#120306"><div class="caption"><h3>🐘 2026 Vigraham</h3></div></div>
       <div class="photo-card"><img src="2026-puja-donor.png" alt="2026 Puja donor" style="height:320px;object-fit:contain;background:#120306"><div class="caption"><h3>🪔 2026 Puja</h3><p>Eripilli Surya Govindu Garu</p></div></div>
     </div>
   </div>
@@ -150,6 +154,48 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 function openYear(y){document.getElementById('modal').style.display='block'}
 function closeModal(){document.getElementById('modal').style.display='none'}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()})
+</script>
+
+<button class="bell-button" id="bellButton" aria-label="Temple bell" title="Ring the temple bell">🔔</button>
+
+<script>
+(function(){
+  let audioCtx;
+  const bell = document.getElementById('bellButton');
+
+  function ringBell(){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if(audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const master = audioCtx.createGain();
+      master.gain.setValueAtTime(0.0001, now);
+      master.gain.exponentialRampToValueAtTime(0.42, now + 0.012);
+      master.gain.exponentialRampToValueAtTime(0.0001, now + 2.6);
+      master.connect(audioCtx.destination);
+
+      // Harmonic partials create a soft temple-bell timbre.
+      [392, 784, 1176, 1568].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = i === 0 ? 'sine' : 'triangle';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.18/(i+1), now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.3 - i*0.2);
+        osc.connect(gain);
+        gain.connect(master);
+        osc.start(now);
+        osc.stop(now + 2.7);
+      });
+
+      bell.classList.remove('ringing');
+      void bell.offsetWidth;
+      bell.classList.add('ringing');
+    }catch(e){}
+  }
+  bell.addEventListener('click', ringBell);
+})();
 </script>
 </body>
 </html>
