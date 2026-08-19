@@ -35,7 +35,7 @@ linear-gradient(135deg,#190008,#4d0018 50%,#170005)}
 footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:#180007}.social{display:flex;justify-content:center;gap:12px;margin:20px 0}.social a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#2b1017;border:1px solid #8d5b00}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:50;padding:30px;overflow:auto}.modal-box{max-width:900px;margin:30px auto;background:#1d080e;border:1px solid var(--gold);border-radius:16px;padding:22px;position:relative}.close{position:absolute;right:15px;top:10px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer}.modal-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.modal-gallery img{width:100%;height:240px;object-fit:cover;border-radius:8px}
 @media(max-width:900px){nav{display:none}.grid6{grid-template-columns:repeat(3,1fr)}.gallery{grid-template-columns:1fr 1fr}.events,.about-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.hero{min-height:610px}.grid6{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.photo-card img{height:380px}.modal-gallery{grid-template-columns:1fr}.modal-gallery img{height:auto}.hero-content{padding-top:75px}}
+@media(max-width:600px){.hero{min-height:610px}.grid6{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.photo-card img{height:380px}.modal-gallery{grid-template-columns:1fr}.modal-gallery img{height:auto}.panel > div[style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr !important}.hero-content{padding-top:75px}}
 </style>
 </head>
 <body>
@@ -85,9 +85,11 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 
 <section id="events" class="section">
 <div class="container">
-<div class="title"><small>📅 FESTIVAL PROGRAMS</small><h2>Upcoming Events</h2><p>Add or edit events easily in the HTML file.</p></div>
+<div class="title"><small>📅 FESTIVAL PROGRAMS</small><h2>Upcoming Events</h2><p>2026 donor information added. Exact event dates can be updated later.</p></div>
 <div class="events">
 <div class="panel" id="eventList">
+  <div class="event"><div class="date"><b>🐘</b>2026</div><div><h3>2026 Vigraham</h3><p>Donated by <strong>Pedakapu Siva &amp; Pedakapu Satish</strong></p></div></div>
+  <div class="event"><div class="date"><b>🪔</b>2026</div><div><h3>2026 Puja</h3><p>Donated by <strong>Eripilli Surya Govindu Garu</strong></p></div></div>
   <div class="event"><div class="date"><b>27</b>AUG</div><div><h3>Ganesh Chaturthi – Pratisthapana</h3><p>Morning • Main Pandal</p></div></div>
   <div class="event"><div class="date"><b>07</b>SEP</div><div><h3>Sankatahara Chaturthi</h3><p>Evening • Devotional Program</p></div></div>
   <div class="event"><div class="date"><b>17</b>SEP</div><div><h3>Anantha Chaturdashi – Nimajjanam</h3><p>Morning/Evening • Immersion Procession</p></div></div>
@@ -99,6 +101,14 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
   <br><p style="color:#ffd76a;font-weight:800">భక్తి • సేవ • స్నేహం • ఐక్యత</p>
 </div>
 </div>
+<div class="container" style="margin-top:20px">
+  <div class="panel">
+    <h2 style="text-align:center;color:#ffd76a;margin-bottom:18px">🙏 2026 Donors</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+      <div class="photo-card"><img src="2026-vigraham-donor.png" alt="2026 Vigraham donor" style="height:320px;object-fit:contain;background:#120306"><div class="caption"><h3>🐘 2026 Vigraham</h3><p>Pedakapu Siva &amp; Pedakapu Satish</p></div></div>
+      <div class="photo-card"><img src="2026-puja-donor.png" alt="2026 Puja donor" style="height:320px;object-fit:contain;background:#120306"><div class="caption"><h3>🪔 2026 Puja</h3><p>Eripilli Surya Govindu Garu</p></div></div>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -107,7 +117,16 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 <div class="title"><small>🕉️ MANA VINAYAKA YOUTH</small><h2>మన వినాయక యువత – అంకంపేట</h2></div>
 <div class="about-grid">
 <div><div class="quote">“వినాయకుడి ఆశీస్సులతో మన ఊరి అభివృద్ధికి మన వంతు సేవ.”</div><p>మన వినాయక యువత అంకంపేటలో గణేష్ చతుర్థి వేడుకలను భక్తిశ్రద్ధలతో, యువత ఐక్యతతో మరియు సాంస్కృతిక కార్యక్రమాలతో నిర్వహించడానికి ఒక వేదిక.</p></div>
-<div><h3 style="color:#8d001f;margin-bottom:10px">🌺 Website Sections</h3><p>• Festival Gallery<br>• Upcoming Events<br>• Puja & Mantras<br>• Youth Activities<br>• Contact & Social Links</p></div>
+<div>
+<h3 style="color:#8d001f;margin-bottom:10px">🌺 About Us & Contact</h3>
+<p>
+• 📸 Instagram: <a href="https://instagram.com/mana_vinayaka_youth" target="_blank" rel="noopener" style="color:#8d001f;font-weight:900">@mana_vinayaka_youth</a><br>
+• 📞 Contact: <a href="tel:6281031255" style="color:#8d001f;font-weight:900">6281031255</a><br>
+• 📷 Festival Gallery<br>
+• 📅 Upcoming Events<br>
+• 🪔 Puja & Mantras
+</p>
+</div>
 </div>
 </div>
 </section>
@@ -117,7 +136,7 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 <div class="container">
 <h2 style="color:#ffd76a">MANA VINAYAKA YOUTH – ANKAMPETA</h2>
 <p>॥ గణపతి బప్పా మోరియా ॥ • మంగళమూర్తి మోరియా ॥</p>
-<div class="social"><a href="#" aria-label="Instagram">📷</a><a href="#" aria-label="YouTube">▶️</a><a href="#" aria-label="WhatsApp">💬</a><a href="#" aria-label="Facebook">f</a></div>
+<div class="social"><a href="https://instagram.com/mana_vinayaka_youth" target="_blank" rel="noopener" aria-label="Instagram">📷</a><a href="#" aria-label="YouTube">▶️</a><a href="tel:6281031255" aria-label="Call">📞</a><a href="#" aria-label="Facebook">f</a></div>
 <p style="color:#bfa6a7;font-size:.85rem">© 2026 Mana Vinayaka Youth – Ankampeta. All Rights Reserved.</p>
 </div>
 </footer>
