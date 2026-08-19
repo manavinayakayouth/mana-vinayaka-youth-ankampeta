@@ -41,6 +41,20 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 .bell-button:hover{transform:scale(1.08)}.bell-button.ringing{animation:bellRing .55s ease-in-out}
 @keyframes bellRing{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(10deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(5deg)}}
 </style>
+
+<style>
+.pay-panel{max-width:1050px;margin:0 auto;background:linear-gradient(145deg,#300611,#140208);border:1px solid rgba(255,215,106,.38);border-radius:24px;padding:28px;box-shadow:0 20px 70px rgba(0,0,0,.28)}
+.pay-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:stretch}
+.pay-copy h2{color:#ffd76a;margin:0 0 8px;font-size:2.2rem}.pay-copy p{color:#f5e7d0;line-height:1.7}
+.upi-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,215,106,.18);border-radius:16px;padding:16px;margin:18px 0}
+.upi-id{font-weight:900;color:#ffd76a;word-break:break-all}
+.pay-btn{display:inline-block;width:100%;text-align:center;padding:15px;border-radius:13px;background:linear-gradient(90deg,#ffca28,#ffd76a);color:#35000b;font-weight:950;text-decoration:none;margin-top:10px;box-sizing:border-box}
+.qr-box{text-align:center;background:#fff;border-radius:18px;padding:15px}.qr-box img{max-width:280px;width:100%;display:block;margin:auto}.qr-box p{color:#4a351d;margin:8px 0;font-weight:800}
+.admin-card{margin-top:24px;background:rgba(255,255,255,.035);border:1px solid rgba(255,215,106,.18);border-radius:18px;padding:20px}
+.admin-card h3{color:#ffd76a}.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.admin-form input,.admin-form select{padding:12px;border-radius:10px;border:1px solid rgba(255,215,106,.25);background:#19050b;color:#fff}.admin-form button{grid-column:1/-1;padding:13px;border:0;border-radius:10px;background:#ffd76a;font-weight:900;color:#35000b}
+#adminArea{display:none}.admin-note{font-size:.78rem;color:#cdbda5;line-height:1.5}.admin-list{margin-top:15px;max-height:220px;overflow:auto}.admin-row{display:flex;justify-content:space-between;gap:10px;padding:10px;border-bottom:1px solid rgba(255,215,106,.12);color:#f8ecd7}
+@media(max-width:760px){.pay-grid{grid-template-columns:1fr}.admin-form{grid-template-columns:1fr}.admin-form button{grid-column:auto}}
+</style>
 </head>
 <body>
 <header>
@@ -50,7 +64,7 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 <span>MANA VINAYAKA YOUTH<small><a href="https://goo.gl/maps/uHPVRMFwndM4RxESA" target="_blank" rel="noopener" style="color:inherit">PALTHERU • ANKAMPETA 📍</a></small></span>
 </a>
     <nav>
-      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#events">EVENTS</a><a href="#donors">DONORS</a><a href="#supporters">SUPPORT</a><a href="#gallery">GALLERY</a><a href="#contact">CONTACT</a>
+      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#events">EVENTS</a><a href="#donors">DONORS</a><a href="#supporters">SUPPORT</a><a href="#donate">DONATE</a><a href="#gallery">GALLERY</a><a href="#contact">CONTACT</a>
     </nav>
     <a class="btn" href="#events">🙏 JOIN US</a>
   </div>
@@ -81,7 +95,7 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 <section id="gallery" class="section">
 <div class="container">
   <div class="title"><small>🌺 MEMORIES 🌺</small><h2>Mana Vinayaka Youth Gallery</h2><p>2024 • 2025 • 2026</p></div>
-  <div class="gallery">
+  <div class="gallery"><div class="photo-card"><img src="2025-04.jpg" alt="Mana Vinayaka Youth Ganesh Chaturthi group photo"><div class="caption"><span class="year">2025</span><h3>Festival Memories</h3></div></div>
     <div class="photo-card"><img src="2025-01.jpg" alt="Mana Vinayaka Youth Ganesh 2025"><div class="caption"><span class="year">2025</span><h3>Vinayaka Darshan</h3><button class="btn" onclick="openYear('2025')">VIEW 2025</button></div></div>
     <div class="photo-card"><img src="2025-02.jpg" alt="Mana Vinayaka Youth Ganesh 2025"><div class="caption"><span class="year">2025</span><h3>Festival Memories</h3><button class="btn" onclick="openYear('2025')">VIEW 2025</button></div></div>
     <div class="photo-card"><img src="2025-03.jpg" alt="Mana Vinayaka Youth signboard 2025"><div class="caption"><span class="year">2025</span><h3>Mana Vinayaka Youth</h3><button class="btn" onclick="openYear('2025')">VIEW 2025</button></div></div>
@@ -210,6 +224,44 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
   </div>
 </div>
 </section>
+
+<section id="donate" class="section">
+<div class="pay-panel">
+  <div class="pay-grid">
+    <div class="pay-copy">
+      <div class="eyebrow" style="color:#ffd76a;letter-spacing:3px;font-weight:900">🙏 SUPPORT THE CELEBRATION</div>
+      <h2>Make a Contribution</h2>
+      <p>మీకు నచ్చిన కార్యక్రమానికి మీ వంతు సహాయం చేయండి. Payment చేయడానికి క్రింది <b>Pay via PhonePe</b> button లేదా QR code ఉపయోగించండి.</p>
+      <div class="upi-box">
+        <div>UPI ID</div>
+        <div class="upi-id">6281031255kalyansbi@ybl</div>
+      </div>
+      <a class="pay-btn" href="upi://pay?pa=6281031255kalyansbi@ybl&pn=Mana%20Vinayaka%20Youth&cu=INR">📱 PAY VIA PHONEPE / UPI</a>
+      <p class="admin-note">PhonePe/UPI app support ఉంటే button ద్వారా payment app open అవుతుంది. లేకపోతే QR code scan చేయండి.</p>
+    </div>
+    <div class="qr-box">
+      <img src="phonepe-qr.png" alt="PhonePe UPI QR Code">
+      <p>Scan &amp; Pay</p>
+      <small>UPI: 6281031255kalyansbi@ybl</small>
+    </div>
+  </div>
+
+  <div class="admin-card">
+    <h3>🔐 Admin • Confirmed Contributions</h3>
+    <p class="admin-note">Payment వచ్చిన తర్వాత మీరు మాత్రమే login చేసి donor name, purpose, amount నమోదు చేయండి. Confirm చేసిన entries scrolling supporters list లో ఈ device/browser లో కనిపిస్తాయి.</p>
+    <button class="pay-btn" style="width:auto;padding:11px 20px;cursor:pointer" onclick="adminLogin()">Admin Login</button>
+    <div id="adminArea">
+      <div class="admin-form" style="margin-top:14px">
+        <input id="aName" placeholder="Donor name">
+        <select id="aPurpose"><option>Vigraham</option><option>Puja</option><option>Decoration</option><option>Annadanam</option><option>Events</option><option>General Contribution</option></select>
+        <input id="aAmount" type="number" min="1" placeholder="Amount ₹">
+        <button onclick="addSupporter()">✓ Confirm &amp; Add Supporter</button>
+      </div>
+      <div class="admin-list" id="adminList"></div>
+    </div>
+  </div>
+</div>
+</section>
 <section id="about" class="section about">
 <div class="container">
 <div class="title"><small>🕉️ MANA VINAYAKA YOUTH</small><h2>మన వినాయక యువత – అంకంపేట</h2></div>
@@ -310,6 +362,50 @@ function sendDonationWhatsApp(){
     '%0APlease verify my contribution.';
   window.open('https://wa.me/916281031255?text=' + text, '_blank');
 }
+</script>
+
+<script>
+const ADMIN_USERNAME = "2026GOD";
+const ADMIN_PASSWORD = "@2026Managod";
+function adminLogin(){
+  const u = prompt("Enter Admin User ID:");
+  if(u === null) return;
+  const p = prompt("Enter Admin Password:");
+  if(u === ADMIN_USERNAME && p === ADMIN_PASSWORD){
+    document.getElementById("adminArea").style.display="block";
+    renderSupporters();
+  }else{
+    alert("Invalid User ID or Password.");
+  }
+}
+function getSupporters(){
+  try{return JSON.parse(localStorage.getItem("mvy_supporters")||"[]")}catch(e){return []}
+}
+function saveSupporters(a){localStorage.setItem("mvy_supporters",JSON.stringify(a))}
+function addSupporter(){
+  const name=document.getElementById("aName").value.trim();
+  const purpose=document.getElementById("aPurpose").value;
+  const amount=document.getElementById("aAmount").value;
+  if(!name||!amount){alert("Enter donor name and amount.");return;}
+  const a=getSupporters();
+  a.push({name,purpose,amount,date:new Date().toLocaleDateString()});
+  saveSupporters(a);
+  document.getElementById("aName").value="";
+  document.getElementById("aAmount").value="";
+  renderSupporters();
+  alert("Contribution confirmed and added.");
+}
+function renderSupporters(){
+  const a=getSupporters(), list=document.getElementById("adminList");
+  list.innerHTML=a.length?a.map((x,i)=>`<div class="admin-row"><span>🙏 ${escapeHtml(x.name)} • ${escapeHtml(x.purpose)}</span><b>₹${escapeHtml(x.amount)}</b></div>`).join(""):"No confirmed contributions yet.";
+  const track=document.querySelector(".ticker-track");
+  if(track && a.length){
+    const items=a.map(x=>`<div class="ticker-item">🙏 <span>${escapeHtml(x.name)}</span> • ${escapeHtml(x.purpose)}</div>`).join("");
+    track.innerHTML=items+items;
+  }
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+document.addEventListener("DOMContentLoaded",renderSupporters);
 </script>
 </body>
 </html>
