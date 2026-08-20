@@ -36,7 +36,7 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 @media(max-width:600px){.hero{min-height:610px}.grid6{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.photo-card img{height:380px}.modal-gallery{grid-template-columns:1fr}.modal-gallery img{height:auto}.hero-content{padding-top:75px}}
 .sponsors-wrap{max-width:850px;margin:0 auto}.sponsor-list{height:300px;overflow:hidden;background:#18070b;border:1px solid #7d5000;border-radius:15px;padding:8px;position:relative}.sponsor-track{will-change:transform}.sponsor-item{padding:13px 16px;border-bottom:1px solid rgba(255,199,0,.18);text-align:center;font-weight:800;color:#ffe8a3}.sponsor-item:last-child{border-bottom:0}.sponsor-empty{text-align:center;color:#e8c9b0;padding:25px}.sponsor-list:hover{overflow-y:auto}
 .year-block{margin:0 0 48px}.year-heading{display:flex;align-items:center;gap:12px;margin:0 0 18px;color:#ffd76a}.year-heading span{font-size:1.35rem;font-weight:1000;letter-spacing:1px}.year-heading i{height:1px;background:linear-gradient(90deg,#8d5b00,transparent);flex:1}.year-heading small{color:#bfa6a7}
-</style>
+.year-block{margin:0 0 52px}.year-heading{display:flex;align-items:center;gap:12px;margin:0 0 18px;color:#ffd76a}.year-heading span{font-size:1.35rem;font-weight:1000;letter-spacing:1px}.year-heading i{height:1px;background:linear-gradient(90deg,#8d5b00,transparent);flex:1}.year-heading small{color:#bfa6a7}.dynamic-card .media-wrap{min-height:240px}.dynamic-card img,.dynamic-card video{background:#080206}</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="gallery.js" defer></script>
 </head>
 <body>
@@ -160,18 +160,22 @@ document.addEventListener('DOMContentLoaded',loadHeroBackground);
 
 <script>
 async function loadSponsors(){
- const host=document.getElementById('sponsorList'); if(!host)return;
- const {data,error}=await sb.from('sponsors').select('id,name').order('id',{ascending:true});
- if(error){host.innerHTML='<div class="sponsor-empty">Sponsor list will appear here shortly.</div>';console.error(error);return;}
- const names=(data||[]).map(x=>x.name).filter(Boolean);
- if(!names.length){host.innerHTML='<div class="sponsor-empty">Sponsors & supporters will be listed here.</div>';return;}
- const items=names.map(n=>`<div class="sponsor-item">${escapeHtml(n)}</div>`).join('');
- host.innerHTML=`<div class="sponsor-track">${items}${items}</div>`;
- const track=host.querySelector('.sponsor-track');
- let y=0, paused=false, half=track.scrollHeight/2;
- host.addEventListener('mouseenter',()=>paused=true); host.addEventListener('mouseleave',()=>paused=false);
- function step(){ if(!paused && names.length>3){ y+=0.35; if(y>=half)y=0; track.style.transform=`translateY(-${y}px)`; } requestAnimationFrame(step); }
- requestAnimationFrame(step);
+  const host=document.getElementById('sponsorList'); if(!host)return;
+  try{
+    const u=sb.storage.from('gallery').getPublicUrl('sponsors/sponsors.json').data.publicUrl+'?v='+Date.now();
+    const res=await fetch(u,{cache:'no-store'});
+    if(!res.ok) throw new Error('No sponsor file yet');
+    const json=await res.json();
+    const names=(json.names||[]).map(x=>String(x).trim()).filter(Boolean);
+    if(!names.length){host.innerHTML='<div class="sponsor-empty">Sponsors & supporters will be listed here.</div>';return;}
+    const esc=s=>s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const items=names.map(n=>`<div class="sponsor-item">${esc(n)}</div>`).join('');
+    host.innerHTML=`<div class="sponsor-track">${items}${items}${items}</div>`;
+    const track=host.querySelector('.sponsor-track'); let y=0,paused=false,half=track.scrollHeight/3;
+    host.addEventListener('mouseenter',()=>paused=true); host.addEventListener('mouseleave',()=>paused=false);
+    function step(){if(!paused&&names.length){y+=0.35;if(y>=half)y=0;track.style.transform=\`translateY(-\${y}px)\`}requestAnimationFrame(step)}
+    requestAnimationFrame(step);
+  }catch(e){host.innerHTML='<div class="sponsor-empty">Sponsor names will appear here after the admin saves them.</div>';}
 }
 document.addEventListener('DOMContentLoaded',loadSponsors);
 </script>
