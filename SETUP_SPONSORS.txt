@@ -1,0 +1,12 @@
+SPONSORS FEATURE
+
+1. Open Supabase SQL Editor.
+2. Paste SPONSORS_SETUP.sql and Run.
+3. Upload/replace admin.html, index.html, gallery.js and config.js on GitHub Pages.
+4. Open admin.html and login with the authorised admin account.
+5. Scroll to "Sponsors / Supporters".
+6. Enter one sponsor name per line.
+7. Tap "Save Sponsor Names".
+8. The public website's Sponsors section updates from Supabase automatically.
+
+No sponsor names need to be edited in HTML.

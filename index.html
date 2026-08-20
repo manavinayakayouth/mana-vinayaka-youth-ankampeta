@@ -29,22 +29,42 @@ linear-gradient(135deg,#190008,#4d0018 50%,#170005)}
 .feature{background:linear-gradient(180deg,#281015,#17070b);border:1px solid #8d5b00;border-radius:14px;padding:22px 10px;text-align:center;transition:.25s}
 .feature:hover{transform:translateY(-5px);border-color:var(--gold)}.icon{font-size:2rem}.feature b{display:block;color:#ffd76a;margin-top:6px}
 .section{padding:55px 0}.title{text-align:center;margin-bottom:30px}.title small{color:var(--gold)}.title h2{font-size:2rem;color:#ffd76a}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.photo-card{background:#18070b;border:1px solid #7d5000;border-radius:15px;overflow:hidden}.photo-card img,.photo-card video{width:100%;height:330px;object-fit:cover;display:block}.dynamic-card video{background:#000}.media-wrap{background:#080206}.photo-card .caption{padding:14px;text-align:center}.year{display:inline-block;background:var(--gold);color:#190006;font-weight:900;border-radius:6px;padding:4px 10px;margin-bottom:5px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.photo-card{background:#18070b;border:1px solid #7d5000;border-radius:15px;overflow:hidden}.photo-card img{width:100%;height:330px;object-fit:cover;display:block}.photo-card .caption{padding:14px;text-align:center}.year{display:inline-block;background:var(--gold);color:#190006;font-weight:900;border-radius:6px;padding:4px 10px;margin-bottom:5px}
 .events{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}.panel{background:linear-gradient(145deg,#2b0a11,#16060a);border:1px solid #8d5b00;border-radius:16px;padding:24px}.event{display:flex;gap:15px;padding:14px 0;border-bottom:1px solid #633d00}.event:last-child{border-bottom:0}.date{min-width:64px;text-align:center;background:#7b001f;border:1px solid var(--gold);border-radius:9px;padding:6px;color:#fff}.date b{display:block;color:var(--gold);font-size:1.25rem}.event h3{color:#ffe28a}.event p{color:#d8c5bd;font-size:.9rem}
 .about{background:linear-gradient(90deg,#fff0d2,#ffe4b4);color:#3a1116}.about .title h2{color:#8d001f}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about p{font-size:1.05rem}.quote{font-size:1.4rem;font-weight:900;color:#8d001f;margin-bottom:15px}
 footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:#180007}.social{display:flex;justify-content:center;gap:12px;margin:20px 0}.social a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#2b1017;border:1px solid #8d5b00}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:50;padding:30px;overflow:auto}.modal-box{max-width:900px;margin:30px auto;background:#1d080e;border:1px solid var(--gold);border-radius:16px;padding:22px;position:relative}.close{position:absolute;right:15px;top:10px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer}.modal-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.modal-gallery img{width:100%;height:240px;object-fit:cover;border-radius:8px}
 @media(max-width:900px){nav{display:none}.grid6{grid-template-columns:repeat(3,1fr)}.gallery{grid-template-columns:1fr 1fr}.events,.about-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.hero{min-height:610px}.grid6{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.photo-card img{height:380px}.modal-gallery{grid-template-columns:1fr}.modal-gallery img{height:auto}.hero-content{padding-top:75px}}
+@media(max-width:600px){.hero{min-height:610px}.grid6{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.photo-card img{height:380px}.modal-gallery{grid-template-columns:1fr}.modal-gallery img{height:auto}.panel > div[style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr !important}.hero-content{padding-top:75px}}
+
+.bell-button{position:fixed;right:18px;bottom:18px;z-index:40;width:58px;height:58px;border-radius:50%;border:1px solid var(--gold);background:linear-gradient(145deg,#7b001f,#2a0710);color:#ffd76a;font-size:1.75rem;cursor:pointer;box-shadow:0 6px 25px rgba(0,0,0,.45);transition:.2s}
+.bell-button:hover{transform:scale(1.08)}.bell-button.ringing{animation:bellRing .55s ease-in-out}
+@keyframes bellRing{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(10deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(5deg)}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="gallery.js" defer></script>
+
+<style>
+.pay-panel{max-width:1050px;margin:0 auto;background:linear-gradient(145deg,#300611,#140208);border:1px solid rgba(255,215,106,.38);border-radius:24px;padding:28px;box-shadow:0 20px 70px rgba(0,0,0,.28)}
+.pay-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:stretch}
+.pay-copy h2{color:#ffd76a;margin:0 0 8px;font-size:2.2rem}.pay-copy p{color:#f5e7d0;line-height:1.7}
+.upi-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,215,106,.18);border-radius:16px;padding:16px;margin:18px 0}
+.upi-id{font-weight:900;color:#ffd76a;word-break:break-all}
+.pay-btn{display:inline-block;width:100%;text-align:center;padding:15px;border-radius:13px;background:linear-gradient(90deg,#ffca28,#ffd76a);color:#35000b;font-weight:950;text-decoration:none;margin-top:10px;box-sizing:border-box}
+.qr-box{text-align:center;background:#fff;border-radius:18px;padding:15px}.qr-box img{max-width:280px;width:100%;display:block;margin:auto}.qr-box p{color:#4a351d;margin:8px 0;font-weight:800}
+.admin-card{margin-top:24px;background:rgba(255,255,255,.035);border:1px solid rgba(255,215,106,.18);border-radius:18px;padding:20px}
+.admin-card h3{color:#ffd76a}.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.admin-form input,.admin-form select{padding:12px;border-radius:10px;border:1px solid rgba(255,215,106,.25);background:#19050b;color:#fff}.admin-form button{grid-column:1/-1;padding:13px;border:0;border-radius:10px;background:#ffd76a;font-weight:900;color:#35000b}
+#adminArea{display:none}.admin-note{font-size:.78rem;color:#cdbda5;line-height:1.5}.admin-list{margin-top:15px;max-height:220px;overflow:auto}.admin-row{display:flex;justify-content:space-between;gap:10px;padding:10px;border-bottom:1px solid rgba(255,215,106,.12);color:#f8ecd7}
+@media(max-width:760px){.pay-grid{grid-template-columns:1fr}.admin-form{grid-template-columns:1fr}.admin-form button{grid-column:auto}}
+</style>
 </head>
 <body>
 <header>
   <div class="container nav">
-    <a class="logo" href="#home">🕉️ MANA VINAYAKA YOUTH<small>ANKAMPETA</small></a>
+    <a class="logo" href="#home" style="display:flex;align-items:center;gap:12px">
+<img src="mana-vinayaka-youth-logo.png" alt="Mana Vinayaka Youth Logo" style="width:58px;height:58px;object-fit:contain;border-radius:50%">
+<span>MANA VINAYAKA YOUTH<small><a href="https://goo.gl/maps/uHPVRMFwndM4RxESA" target="_blank" rel="noopener" style="color:inherit">PALTHERU • ANKAMPETA 📍</a></small></span>
+</a>
     <nav>
-      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#events">EVENTS</a><a href="#gallery">GALLERY</a><a href="#contact">CONTACT</a><a href="admin.html">ADMIN</a>
+      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#events">EVENTS</a><a href="#donors">DONORS</a><a href="#supporters">SUPPORT</a><a href="#donate">DONATE</a><a href="#gallery">GALLERY</a><a href="#contact">CONTACT</a>
     </nav>
     <a class="btn" href="#events">🙏 JOIN US</a>
   </div>
@@ -75,20 +95,28 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 <section id="gallery" class="section">
 <div class="container">
   <div class="title"><small>🌺 MEMORIES 🌺</small><h2>Mana Vinayaka Youth Gallery</h2><p>2024 • 2025 • 2026</p></div>
-  <div class="gallery" id="dynamicGallery"></div>
-  <p style="text-align:center;margin-top:22px;color:#e8c9b0">2026 photos and videos uploaded by the admin will appear here automatically.</p>
+  <div class="gallery"><div class="photo-card"><img src="2025-04.jpg" alt="Mana Vinayaka Youth Ganesh Chaturthi group photo"><div class="caption"><span class="year">2025</span><h3>Festival Memories</h3></div></div>
+    <div class="photo-card"><img src="2025-01.jpg" alt="Mana Vinayaka Youth Ganesh 2025"><div class="caption"><span class="year">2025</span><h3>Vinayaka Darshan</h3><button class="btn" onclick="openYear('2025')">VIEW 2025</button></div></div>
+    <div class="photo-card"><img src="2025-02.jpg" alt="Mana Vinayaka Youth Ganesh 2025"><div class="caption"><span class="year">2025</span><h3>Festival Memories</h3><button class="btn" onclick="openYear('2025')">VIEW 2025</button></div></div>
+    <div class="photo-card"><img src="2025-03.jpg" alt="Mana Vinayaka Youth signboard 2025"><div class="caption"><span class="year">2025</span><h3>Mana Vinayaka Youth</h3><button class="btn" onclick="openYear('2025')">VIEW 2025</button></div></div>
+    <div class="photo-card">
+      <video controls playsinline preload="metadata" style="width:100%;height:260px;object-fit:cover;background:#000;border-radius:14px 14px 0 0">
+        <source src="2025-video-01.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+      <div class="caption"><span class="year">2025</span><h3>Festival Video</h3></div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:22px;color:#e8c9b0">2024 and 2026 photos can be added later from the same Gallery section.</p>
 </div>
 </section>
 
 <section id="events" class="section">
 <div class="container">
-<div class="title"><small>📅 FESTIVAL PROGRAMS</small><h2>Upcoming Events</h2><p>Add or edit events easily in the HTML file.</p></div>
+<div class="title"><small>📅 FESTIVAL PROGRAMS</small><h2>Upcoming Events</h2><p>2026 donor information added. Exact event dates can be updated later.</p></div>
 <div class="events">
 <div class="panel" id="eventList">
-  <div class="event"><div class="date"><b>27</b>AUG</div><div><h3>Ganesh Chaturthi – Pratisthapana</h3><p>Morning • Main Pandal</p></div></div>
-  <div class="event"><div class="date"><b>07</b>SEP</div><div><h3>Sankatahara Chaturthi</h3><p>Evening • Devotional Program</p></div></div>
-  <div class="event"><div class="date"><b>17</b>SEP</div><div><h3>Anantha Chaturdashi – Nimajjanam</h3><p>Morning/Evening • Immersion Procession</p></div></div>
-  <div class="event"><div class="date"><b>+</b>ADD</div><div><h3>Your Next Event</h3><p>Edit this section to add local youth programs, bhajans, annadanam, games or cultural events.</p></div></div>
+  <div class="event"><div class="date"><b>🙏</b></div><div><h3>Upcoming Programs</h3><p>Festival programs and exact dates will be announced here later.</p></div></div>
 </div>
 <div class="panel">
   <h2 style="color:#ffd76a;margin-bottom:10px">🙏 Our Mission</h2>
@@ -96,9 +124,139 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
   <br><p style="color:#ffd76a;font-weight:800">భక్తి • సేవ • స్నేహం • ఐక్యత</p>
 </div>
 </div>
+</section>
+
+
+<section id="donors" class="section">
+<div class="container">
+  <div class="title"><small>🪔 ✨ WITH GRATITUDE ✨ 🪔</small><h2 style="font-size:2.5rem;text-transform:uppercase;letter-spacing:3px;text-shadow:0 3px 12px rgba(255,196,0,.35)">🙏 2026 DONORS 🙏</h2><p style="color:#ffd76a;font-weight:800">With heartfelt gratitude</p></div>
+  <div class="gallery">
+    <div class="photo-card">
+      <img src="2026-vigraham-donor.png" alt="2026 Vigraham contribution">
+      
+    </div>
+    <div class="photo-card">
+      <img src="2026-puja-donor.png" alt="2026 Puja contribution">
+      
+    </div>
+  </div>
 </div>
 </section>
 
+
+<style>
+.support-wrap{max-width:1100px;margin:0 auto}
+.support-card{background:linear-gradient(145deg,rgba(72,7,20,.92),rgba(25,3,10,.96));border:1px solid rgba(255,215,106,.38);border-radius:24px;padding:28px;box-shadow:0 18px 60px rgba(0,0,0,.28)}
+.support-head{text-align:center;margin-bottom:22px}
+.support-head .eyebrow{color:#ffd76a;font-size:.78rem;letter-spacing:3px;font-weight:900}
+.support-head h2{margin:8px 0;font-size:clamp(1.8rem,4vw,2.7rem);color:#ffd76a}
+.support-head p{margin:0;color:#f6e9d5}
+.ticker{overflow:hidden;border-top:1px solid rgba(255,215,106,.22);border-bottom:1px solid rgba(255,215,106,.22);padding:12px 0;margin:18px 0 26px;background:rgba(0,0,0,.12)}
+.ticker-track{display:flex;width:max-content;animation:supportScroll 24s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-item{white-space:nowrap;padding:0 28px;color:#fff2cf;font-weight:800}
+.ticker-item span{color:#ffd76a}
+@keyframes supportScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.donation-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.donation-info,.donation-form{background:rgba(255,255,255,.035);border:1px solid rgba(255,215,106,.18);border-radius:18px;padding:22px}
+.donation-info h3,.donation-form h3{color:#ffd76a;margin-top:0}
+.purpose-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.purpose{border:1px solid rgba(255,215,106,.22);border-radius:12px;padding:12px;color:#fff0d0;background:rgba(255,255,255,.025)}
+.donation-form input,.donation-form select,.donation-form textarea{width:100%;box-sizing:border-box;margin:7px 0 10px;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,215,106,.25);background:#19050b;color:#fff}
+.donation-form label{font-size:.82rem;color:#f2dfbd;font-weight:800}
+.donate-btn{width:100%;border:0;border-radius:12px;padding:14px;background:linear-gradient(90deg,#ffca28,#ffd76a);color:#39000d;font-weight:950;cursor:pointer;font-size:1rem}
+.small-note{font-size:.78rem;color:#cdbda5;line-height:1.5;margin-top:10px}
+@media(max-width:760px){.donation-grid{grid-template-columns:1fr}.purpose-list{grid-template-columns:1fr 1fr}.support-card{padding:18px}}
+</style>
+
+<section id="supporters" class="section">
+<div class="support-wrap">
+  <div class="support-card">
+    <div class="support-head">
+      <div class="eyebrow">🙏 WITH GRATITUDE</div>
+      <h2>Our Supporters</h2>
+      <p>Every contribution helps us celebrate together.</p>
+    </div>
+
+    <div class="ticker" aria-label="Supporters">
+      <div class="ticker-track">
+        <div class="ticker-item">🙏 <span>Eripilli Surya Govindu Garu</span> • Festival Contribution</div>
+        <div class="ticker-item">🐘 <span>Pedakapu Siva &amp; Pedakapu Satish</span> • Festival Contribution</div>
+        <div class="ticker-item">🙏 <span>Eripilli Surya Govindu Garu</span> • Festival Contribution</div>
+        <div class="ticker-item">🐘 <span>Pedakapu Siva &amp; Pedakapu Satish</span> • Festival Contribution</div>
+      </div>
+    </div>
+
+    <div class="donation-grid">
+      <div class="donation-info">
+        <h3>🤝 Become a Supporter</h3>
+        <p>మీకు నచ్చిన కార్యక్రమానికి మీ వంతు సహాయం చేయండి. మీ వివరాలను పంపండి; మేము contribution ని verify చేసి supporters list లో చేర్చుతాము.</p>
+        <div class="purpose-list">
+          <div class="purpose">🐘 Vigraham</div>
+          <div class="purpose">🪔 Puja</div>
+          <div class="purpose">🌺 Decoration</div>
+          <div class="purpose">🍚 Annadanam</div>
+          <div class="purpose">🎉 Events</div>
+          <div class="purpose">💛 General</div>
+        </div>
+        <p class="small-note">Public supporter list లో పేరు చూపించడానికి మీ permission తీసుకుంటాం.</p>
+      </div>
+
+      <div class="donation-form">
+        <h3>📝 Contribution Details</h3>
+        <label for="donorName">Your Name</label>
+        <input id="donorName" type="text" placeholder="Enter your name">
+        <label for="donorPurpose">Contribution For</label>
+        <select id="donorPurpose">
+          <option>Vigraham</option><option>Puja</option><option>Decoration</option>
+          <option>Annadanam</option><option>Events</option><option>General Contribution</option>
+        </select>
+        <label for="donorAmount">Amount (₹)</label>
+        <input id="donorAmount" type="number" min="1" placeholder="Enter amount">
+        <label for="donorPhone">Mobile Number</label>
+        <input id="donorPhone" type="tel" placeholder="Optional">
+        <label for="donorMessage">Message</label>
+        <textarea id="donorMessage" rows="3" placeholder="Optional note"></textarea>
+        <button class="donate-btn" type="button" onclick="sendDonationWhatsApp()">Send Contribution Details on WhatsApp</button>
+        <p class="small-note">After sending, the team can verify the contribution and add the supporter to the public scrolling list.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="donate" class="section">
+<div class="pay-panel">
+  <div class="pay-grid">
+    <div class="pay-copy">
+      <div class="eyebrow" style="color:#ffd76a;letter-spacing:3px;font-weight:900">🙏 SUPPORT THE CELEBRATION</div>
+      <h2>Make a Contribution</h2>
+      <p>మీకు నచ్చిన కార్యక్రమానికి మీ వంతు సహాయం చేయండి. Payment చేయడానికి క్రింది <b>Pay via PhonePe</b> button లేదా QR code ఉపయోగించండి.</p>
+      <div class="upi-box">
+        <div>UPI ID</div>
+        <div class="upi-id">6281031255kalyansbi@ybl</div>
+      </div>
+      <a class="pay-btn" href="upi://pay?pa=6281031255kalyansbi@ybl&pn=Mana%20Vinayaka%20Youth&cu=INR">📱 PAY VIA PHONEPE / UPI</a>
+      <p class="admin-note">PhonePe/UPI app support ఉంటే button ద్వారా payment app open అవుతుంది. లేకపోతే QR code scan చేయండి.</p>
+    </div>
+  </div>
+
+  <div class="admin-card">
+    <h3>🔐 Admin • Confirmed Contributions</h3>
+    <p class="admin-note">Payment వచ్చిన తర్వాత మీరు మాత్రమే login చేసి donor name, purpose, amount నమోదు చేయండి. Confirm చేసిన entries scrolling supporters list లో ఈ device/browser లో కనిపిస్తాయి.</p>
+    <button class="pay-btn" style="width:auto;padding:11px 20px;cursor:pointer" onclick="adminLogin()">Admin Login</button>
+    <div id="adminArea">
+      <div class="admin-form" style="margin-top:14px">
+        <input id="aName" placeholder="Donor name">
+        <select id="aPurpose"><option>Vigraham</option><option>Puja</option><option>Decoration</option><option>Annadanam</option><option>Events</option><option>General Contribution</option></select>
+        <input id="aAmount" type="number" min="1" placeholder="Amount ₹">
+        <button onclick="addSupporter()">✓ Confirm &amp; Add Supporter</button>
+      </div>
+      <div class="admin-list" id="adminList"></div>
+    </div>
+  </div>
+</div>
+</section>
 <section id="about" class="section about">
 <div class="container">
 <div class="title"><small>🕉️ MANA VINAYAKA YOUTH</small><h2>మన వినాయక యువత – అంకంపేట</h2></div>
@@ -137,6 +295,112 @@ footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:
 function openYear(y){document.getElementById('modal').style.display='block'}
 function closeModal(){document.getElementById('modal').style.display='none'}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()})
+</script>
+
+<button class="bell-button" id="bellButton" aria-label="Temple bell" title="Ring the temple bell">🔔</button>
+
+<script>
+(function(){
+  let audioCtx;
+  const bell = document.getElementById('bellButton');
+
+  function ringBell(){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if(audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const master = audioCtx.createGain();
+      master.gain.setValueAtTime(0.0001, now);
+      master.gain.exponentialRampToValueAtTime(0.42, now + 0.012);
+      master.gain.exponentialRampToValueAtTime(0.0001, now + 2.6);
+      master.connect(audioCtx.destination);
+
+      // Harmonic partials create a soft temple-bell timbre.
+      [392, 784, 1176, 1568].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = i === 0 ? 'sine' : 'triangle';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.18/(i+1), now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.3 - i*0.2);
+        osc.connect(gain);
+        gain.connect(master);
+        osc.start(now);
+        osc.stop(now + 2.7);
+      });
+
+      bell.classList.remove('ringing');
+      void bell.offsetWidth;
+      bell.classList.add('ringing');
+    }catch(e){}
+  }
+  bell.addEventListener('click', ringBell);
+})();
+</script>
+
+<script>
+function sendDonationWhatsApp(){
+  const name=document.getElementById('donorName').value.trim();
+  const purpose=document.getElementById('donorPurpose').value;
+  const amount=document.getElementById('donorAmount').value;
+  const phone=document.getElementById('donorPhone').value.trim();
+  const message=document.getElementById('donorMessage').value.trim();
+  if(!name || !amount){ alert('Please enter your name and amount.'); return; }
+  const text =
+    '🙏 Mana Vinayaka Youth – Contribution Details%0A%0A' +
+    'Name: ' + encodeURIComponent(name) + '%0A' +
+    'Purpose: ' + encodeURIComponent(purpose) + '%0A' +
+    'Amount: ₹' + encodeURIComponent(amount) + '%0A' +
+    (phone ? 'Mobile: ' + encodeURIComponent(phone) + '%0A' : '') +
+    (message ? 'Message: ' + encodeURIComponent(message) + '%0A' : '') +
+    '%0APlease verify my contribution.';
+  window.open('https://wa.me/916281031255?text=' + text, '_blank');
+}
+</script>
+
+<script>
+const ADMIN_USERNAME = "2026GOD";
+const ADMIN_PASSWORD = "@2026Managod";
+function adminLogin(){
+  const u = prompt("Enter Admin User ID:");
+  if(u === null) return;
+  const p = prompt("Enter Admin Password:");
+  if(u === ADMIN_USERNAME && p === ADMIN_PASSWORD){
+    document.getElementById("adminArea").style.display="block";
+    renderSupporters();
+  }else{
+    alert("Invalid User ID or Password.");
+  }
+}
+function getSupporters(){
+  try{return JSON.parse(localStorage.getItem("mvy_supporters")||"[]")}catch(e){return []}
+}
+function saveSupporters(a){localStorage.setItem("mvy_supporters",JSON.stringify(a))}
+function addSupporter(){
+  const name=document.getElementById("aName").value.trim();
+  const purpose=document.getElementById("aPurpose").value;
+  const amount=document.getElementById("aAmount").value;
+  if(!name||!amount){alert("Enter donor name and amount.");return;}
+  const a=getSupporters();
+  a.push({name,purpose,amount,date:new Date().toLocaleDateString()});
+  saveSupporters(a);
+  document.getElementById("aName").value="";
+  document.getElementById("aAmount").value="";
+  renderSupporters();
+  alert("Contribution confirmed and added.");
+}
+function renderSupporters(){
+  const a=getSupporters(), list=document.getElementById("adminList");
+  list.innerHTML=a.length?a.map((x,i)=>`<div class="admin-row"><span>🙏 ${escapeHtml(x.name)} • ${escapeHtml(x.purpose)}</span><b>₹${escapeHtml(x.amount)}</b></div>`).join(""):"No confirmed contributions yet.";
+  const track=document.querySelector(".ticker-track");
+  if(track && a.length){
+    const items=a.map(x=>`<div class="ticker-item">🙏 <span>${escapeHtml(x.name)}</span> • ${escapeHtml(x.purpose)}</div>`).join("");
+    track.innerHTML=items+items;
+  }
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+document.addEventListener("DOMContentLoaded",renderSupporters);
 </script>
 </body>
 </html>

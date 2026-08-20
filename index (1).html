@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mana Vinayaka Youth - Ankampeta | Ganesh Chaturthi">
+<title>Mana Vinayaka Youth – Ankampeta</title>
+<style>
+:root{--gold:#ffc400;--gold2:#ff9f00;--maroon:#4a0015;--dark:#100006;--card:#21080d;--cream:#fff3d4}
+*{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#100006,#23070d 45%,#120306);color:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(30,0,9,.96);border-bottom:1px solid #8d5b00;backdrop-filter:blur(8px)}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-weight:900;letter-spacing:1px;color:var(--gold);font-size:1.15rem}.logo small{display:block;color:#fff;letter-spacing:4px;font-size:.72rem}
+nav{display:flex;gap:22px;align-items:center;font-size:.86rem;font-weight:700}nav a:hover{color:var(--gold)}
+.btn{display:inline-block;background:var(--gold);color:#190006;padding:12px 22px;border-radius:9px;font-weight:900;border:0;cursor:pointer}
+.hero{min-height:680px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;background-position:center;background-size:cover;background-repeat:no-repeat;background-image:linear-gradient(135deg,#190008,#4d0018 50%,#170005)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,0,6,.35),rgba(16,0,6,.68));z-index:0;pointer-events:none}
+.hero:before{content:"🪔  🌺  🪔  🌺  🪔  🌺  🪔";position:absolute;top:12px;left:0;width:100%;font-size:30px;word-spacing:22px;opacity:.9}
+.hero-content{padding:90px 0 60px;position:relative;z-index:1}
+.om{color:var(--gold);font-size:1.15rem;font-weight:800;margin-bottom:12px}
+.hero h1{font-size:clamp(2.5rem,8vw,5.7rem);line-height:.95;text-transform:uppercase;text-shadow:0 5px 20px #000}
+.hero h1 span{color:var(--gold);display:block}.hero h2{margin:22px 0;color:#ffd86b;font-size:clamp(1.1rem,3vw,1.8rem)}
+.hero p{font-size:1.1rem;color:#ffe9b0;margin:15px 0 28px}.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.outline{border:1px solid var(--gold);color:#fff;background:transparent}
+.features{padding:55px 0}.grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.feature{background:linear-gradient(180deg,#281015,#17070b);border:1px solid #8d5b00;border-radius:14px;padding:22px 10px;text-align:center;transition:.25s}
+.feature:hover{transform:translateY(-5px);border-color:var(--gold)}.icon{font-size:2rem}.feature b{display:block;color:#ffd76a;margin-top:6px}
+.section{padding:55px 0}.title{text-align:center;margin-bottom:30px}.title small{color:var(--gold)}.title h2{font-size:2rem;color:#ffd76a}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.photo-card{background:#18070b;border:1px solid #7d5000;border-radius:15px;overflow:hidden}.photo-card img,.photo-card video{width:100%;height:330px;object-fit:cover;display:block}.dynamic-card video{background:#000}.media-wrap{background:#080206}.photo-card .caption{padding:14px;text-align:center}.year{display:inline-block;background:var(--gold);color:#190006;font-weight:900;border-radius:6px;padding:4px 10px;margin-bottom:5px}
+.events{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}.panel{background:linear-gradient(145deg,#2b0a11,#16060a);border:1px solid #8d5b00;border-radius:16px;padding:24px}.event{display:flex;gap:15px;padding:14px 0;border-bottom:1px solid #633d00}.event:last-child{border-bottom:0}.date{min-width:64px;text-align:center;background:#7b001f;border:1px solid var(--gold);border-radius:9px;padding:6px;color:#fff}.date b{display:block;color:var(--gold);font-size:1.25rem}.event h3{color:#ffe28a}.event p{color:#d8c5bd;font-size:.9rem}
+.about{background:linear-gradient(90deg,#fff0d2,#ffe4b4);color:#3a1116}.about .title h2{color:#8d001f}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about p{font-size:1.05rem}.quote{font-size:1.4rem;font-weight:900;color:#8d001f;margin-bottom:15px}
+footer{padding:45px 0;text-align:center;border-top:1px solid #8d5b00;background:#180007}.social{display:flex;justify-content:center;gap:12px;margin:20px 0}.social a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#2b1017;border:1px solid #8d5b00}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:50;padding:30px;overflow:auto}.modal-box{max-width:900px;margin:30px auto;background:#1d080e;border:1px solid var(--gold);border-radius:16px;padding:22px;position:relative}.close{position:absolute;right:15px;top:10px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer}.modal-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.modal-gallery img{width:100%;height:240px;object-fit:cover;border-radius:8px}
+@media(max-width:900px){nav{display:none}.grid6{grid-template-columns:repeat(3,1fr)}.gallery{grid-template-columns:1fr 1fr}.events,.about-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.hero{min-height:610px}.grid6{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr}.photo-card img{height:380px}.modal-gallery{grid-template-columns:1fr}.modal-gallery img{height:auto}.hero-content{padding-top:75px}}
+.sponsors-wrap{max-width:850px;margin:0 auto}.sponsor-list{height:300px;overflow:hidden;background:#18070b;border:1px solid #7d5000;border-radius:15px;padding:8px;position:relative}.sponsor-track{will-change:transform}.sponsor-item{padding:13px 16px;border-bottom:1px solid rgba(255,199,0,.18);text-align:center;font-weight:800;color:#ffe8a3}.sponsor-item:last-child{border-bottom:0}.sponsor-empty{text-align:center;color:#e8c9b0;padding:25px}.sponsor-list:hover{overflow-y:auto}</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="gallery.js" defer></script>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home">🕉️ MANA VINAYAKA YOUTH<small>ANKAMPETA</small></a>
+    <nav>
+      <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#events">EVENTS</a><a href="#gallery">GALLERY</a><a href="#sponsors">SPONSORS</a><a href="#contact">CONTACT</a><a href="admin.html">ADMIN</a>
+    </nav>
+    <a class="btn" href="#events">🙏 JOIN US</a>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="container hero-content">
+    <div class="om">॥ శ్రీ గణేశాయ నమః ॥</div>
+    <h1>Mana Vinayaka <span>Youth</span>Ankampeta</h1>
+    <h2>🐘 Ganesh Chaturthi 2026 🐘</h2>
+    <p>భక్తి • సేవ • స్నేహం • ఐక్యత</p>
+    <div class="actions"><a class="btn" href="#about">ABOUT US</a><a class="btn outline" href="#gallery">📸 VIEW GALLERY</a></div>
+  </div>
+</section>
+
+<section class="features">
+<div class="container grid6">
+  <a class="feature" href="#about"><div class="icon">🪔</div><b>PUJA VIDHANAM</b><small>పూజా విధానం</small></a>
+  <a class="feature" href="#about"><div class="icon">🌿</div><b>21 PATRI</b><small>21 పత్రులు</small></a>
+  <a class="feature" href="#events"><div class="icon">🕉️</div><b>MANTRAS</b><small>మంత్రాలు</small></a>
+  <a class="feature" href="#events"><div class="icon">📅</div><b>EVENTS</b><small>కార్యక్రమాలు</small></a>
+  <a class="feature" href="#gallery"><div class="icon">📸</div><b>GALLERY</b><small>ఫోటోలు</small></a>
+  <a class="feature" href="#contact"><div class="icon">📞</div><b>CONTACT</b><small>సంప్రదించండి</small></a>
+</div>
+</section>
+
+<section id="gallery" class="section">
+<div class="container">
+  <div class="title"><small>🌺 MEMORIES 🌺</small><h2>Mana Vinayaka Youth Gallery</h2><p>2024 • 2025 • 2026</p></div>
+  <div class="gallery" id="dynamicGallery"></div>
+  <p style="text-align:center;margin-top:22px;color:#e8c9b0">2026 photos and videos uploaded by the admin will appear here automatically.</p>
+</div>
+</section>
+
+<section id="sponsors" class="section">
+<div class="container">
+  <div class="title"><small>🤝 SUPPORT • SPONSORS 🤝</small><h2>Our Sponsors & Supporters</h2><p>మన కార్యక్రమానికి సహకరిస్తున్న వారు</p></div>
+  <div class="sponsors-wrap"><div class="sponsor-list" id="sponsorList"><div class="sponsor-empty">Loading sponsor names…</div></div></div>
+</div>
+</section>
+
+<section id="events" class="section">
+<div class="container">
+<div class="title"><small>📅 FESTIVAL PROGRAMS</small><h2>Upcoming Events</h2><p>Add or edit events easily in the HTML file.</p></div>
+<div class="events">
+<div class="panel" id="eventList">
+  <div class="event"><div class="date"><b>27</b>AUG</div><div><h3>Ganesh Chaturthi – Pratisthapana</h3><p>Morning • Main Pandal</p></div></div>
+  <div class="event"><div class="date"><b>07</b>SEP</div><div><h3>Sankatahara Chaturthi</h3><p>Evening • Devotional Program</p></div></div>
+  <div class="event"><div class="date"><b>17</b>SEP</div><div><h3>Anantha Chaturdashi – Nimajjanam</h3><p>Morning/Evening • Immersion Procession</p></div></div>
+  <div class="event"><div class="date"><b>+</b>ADD</div><div><h3>Your Next Event</h3><p>Edit this section to add local youth programs, bhajans, annadanam, games or cultural events.</p></div></div>
+</div>
+<div class="panel">
+  <h2 style="color:#ffd76a;margin-bottom:10px">🙏 Our Mission</h2>
+  <p>అంకంపేట గ్రామ యువత కలిసి, వినాయకుడి ఆశీస్సులతో సంప్రదాయం, సేవా కార్యక్రమాలు, సాంస్కృతిక కార్యక్రమాలు నిర్వహిస్తూ యువతలో ఐక్యతను పెంపొందించడం మా లక్ష్యం.</p>
+  <br><p style="color:#ffd76a;font-weight:800">భక్తి • సేవ • స్నేహం • ఐక్యత</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about" class="section about">
+<div class="container">
+<div class="title"><small>🕉️ MANA VINAYAKA YOUTH</small><h2>మన వినాయక యువత – అంకంపేట</h2></div>
+<div class="about-grid">
+<div><div class="quote">“వినాయకుడి ఆశీస్సులతో మన ఊరి అభివృద్ధికి మన వంతు సేవ.”</div><p>మన వినాయక యువత అంకంపేటలో గణేష్ చతుర్థి వేడుకలను భక్తిశ్రద్ధలతో, యువత ఐక్యతతో మరియు సాంస్కృతిక కార్యక్రమాలతో నిర్వహించడానికి ఒక వేదిక.</p></div>
+<div>
+<h3 style="color:#8d001f;margin-bottom:10px">🌺 About Us & Contact</h3>
+<p>
+• 📸 Instagram: <a href="https://instagram.com/mana_vinayaka_youth" target="_blank" rel="noopener" style="color:#8d001f;font-weight:900">@mana_vinayaka_youth</a><br>
+• 📞 Contact: <a href="tel:6281031255" style="color:#8d001f;font-weight:900">6281031255</a><br>
+• 📷 Festival Gallery<br>
+• 📅 Upcoming Events<br>
+• 🪔 Puja & Mantras
+</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer id="contact">
+<div class="container">
+<h2 style="color:#ffd76a">MANA VINAYAKA YOUTH – ANKAMPETA</h2>
+<p>॥ గణపతి బప్పా మోరియా ॥ • మంగళమూర్తి మోరియా ॥</p>
+<div class="social"><a href="https://instagram.com/mana_vinayaka_youth" target="_blank" rel="noopener" aria-label="Instagram">📷</a><a href="#" aria-label="YouTube">▶️</a><a href="tel:6281031255" aria-label="Call">📞</a><a href="#" aria-label="Facebook">f</a></div>
+<p style="color:#bfa6a7;font-size:.85rem">© 2026 Mana Vinayaka Youth – Ankampeta. All Rights Reserved.</p>
+</div>
+</footer>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()">
+<div class="modal-box"><button class="close" onclick="closeModal()">×</button><h2 style="color:#ffd76a">2025 – Mana Vinayaka Youth</h2><p>Ganesh Chaturthi memories</p><div class="modal-gallery">
+<img src="2025-01.jpg" alt="2025 Ganesh idol"><img src="2025-02.jpg" alt="2025 festival selfie"><img src="2025-03.jpg" alt="2025 youth signboard">
+</div></div></div>
+
+<script>
+async function loadHeroBackground(){
+  const hero=document.querySelector('.hero'); if(!hero)return;
+  try{
+    const {data,error}=await sb.storage.from('gallery').list('hero',{limit:100,sortBy:{column:'created_at',order:'desc'}});
+    const files=(data||[]).filter(x=>x.name && x.name!=='.emptyFolderPlaceholder');
+    if(!error && files.length){
+      const {data:u}=sb.storage.from('gallery').getPublicUrl('hero/'+files[0].name);
+      if(u?.publicUrl) hero.style.backgroundImage=`linear-gradient(135deg,rgba(25,0,8,.35),rgba(77,0,24,.55),rgba(23,0,5,.65)),url("${u.publicUrl}")`;
+    }
+  }catch(e){console.error(e)}
+}
+function openYear(y){document.getElementById('modal').style.display='block'}
+function closeModal(){document.getElementById('modal').style.display='none'}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.addEventListener('DOMContentLoaded',loadHeroBackground);
+</script>
+
+<script>
+async function loadSponsors(){
+ const host=document.getElementById('sponsorList'); if(!host)return;
+ const {data,error}=await sb.from('sponsors').select('id,name').order('id',{ascending:true});
+ if(error){host.innerHTML='<div class="sponsor-empty">Sponsor list will appear here shortly.</div>';console.error(error);return;}
+ const names=(data||[]).map(x=>x.name).filter(Boolean);
+ if(!names.length){host.innerHTML='<div class="sponsor-empty">Sponsors & supporters will be listed here.</div>';return;}
+ const items=names.map(n=>`<div class="sponsor-item">${escapeHtml(n)}</div>`).join('');
+ host.innerHTML=`<div class="sponsor-track">${items}${items}</div>`;
+ const track=host.querySelector('.sponsor-track');
+ let y=0, paused=false, half=track.scrollHeight/2;
+ host.addEventListener('mouseenter',()=>paused=true); host.addEventListener('mouseleave',()=>paused=false);
+ function step(){ if(!paused && names.length>3){ y+=0.35; if(y>=half)y=0; track.style.transform=`translateY(-${y}px)`; } requestAnimationFrame(step); }
+ requestAnimationFrame(step);
+}
+document.addEventListener('DOMContentLoaded',loadSponsors);
+</script>
+</body>
+</html>

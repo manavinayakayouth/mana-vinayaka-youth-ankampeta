@@ -13,3 +13,10 @@ MANA VINAYAKA YOUTH – 2026 GALLERY ADMIN SETUP
 7. Open /admin.html. Login using the email/password of the Supabase Auth admin account. The site does NOT put a password in JavaScript.
 
 IMPORTANT: Never put a Supabase service_role/secret key in GitHub Pages. Only the anon/public key belongs in config.js.
+
+Sponsor names now auto-scroll vertically on the public website.
+
+HOME BACKGROUND:
+- Admin login > Home Background Photo > choose image > Upload Home Background.
+- The newest image uploaded under gallery/hero/ becomes the website's home background automatically.
+- No extra bucket is required; the existing public gallery bucket is used.

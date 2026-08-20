@@ -3,13 +3,37 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Admin – Mana Vinayaka Youth</title>
 <style>
-body{margin:0;background:#120306;color:#fff;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:40px auto;padding:20px}.card{background:#21080d;border:1px solid #8d5b00;border-radius:18px;padding:25px;margin-bottom:20px}h1,h2{color:#ffd76a}input,button{width:100%;padding:13px;margin:7px 0;border-radius:9px;border:1px solid #8d5b00;box-sizing:border-box}input{background:#16070b;color:#fff}button{background:#ffc400;color:#190006;font-weight:900;cursor:pointer}.secondary{background:transparent;color:#fff}.hidden{display:none}.status{color:#ffd76a;margin-top:10px}.back{color:#ffd76a;text-decoration:none}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.row{grid-template-columns:1fr}}
+body{margin:0;background:#120306;color:#fff;font-family:Arial,sans-serif}.wrap{max-width:760px;margin:40px auto;padding:20px}.card{background:#21080d;border:1px solid #8d5b00;border-radius:18px;padding:25px;margin-bottom:20px}h1,h2{color:#ffd76a}input,button{width:100%;padding:13px;margin:7px 0;border-radius:9px;border:1px solid #8d5b00;box-sizing:border-box}input,textarea{background:#16070b;color:#fff}textarea{width:100%;padding:13px;margin:7px 0;border-radius:9px;border:1px solid #8d5b00;box-sizing:border-box;resize:vertical}button{background:#ffc400;color:#190006;font-weight:900;cursor:pointer}.secondary{background:transparent;color:#fff}.hidden{display:none}.status{color:#ffd76a;margin-top:10px}.back{color:#ffd76a;text-decoration:none}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.row{grid-template-columns:1fr}}
 </style></head><body><div class="wrap">
 <a class="back" href="index.html">← Back to website</a>
-<div class="card"><h1>🙏 2026 Gallery Admin</h1><p>Only the authorised Supabase account can upload.</p>
+<div class="card"><h1>🙏 Gallery Admin</h1><p>Only the authorised Supabase account can upload.</p>
 <form id="login"><input id="email" type="email" placeholder="Admin email" required><input id="password" type="password" placeholder="Password" required><button>Login</button></form>
 <button id="logout" class="secondary hidden">Logout</button><div id="who" class="status"></div></div>
-<div id="panel" class="card hidden"><h2>Upload 2026 Photo / Video</h2><input id="file" type="file" accept="image/*,video/*" required><input id="title" placeholder="Title (optional)"><button id="upload">Upload to Gallery</button><div id="status" class="status"></div><hr style="border-color:#633d00"><h2>Uploaded files</h2><div id="files"></div></div>
+<div id="panel" class="card hidden">
+<h2>🏠 Home Background Photo</h2>
+<p style="color:#e8c9b0">Upload one photo for the website's main MANA VINAYAKA YOUTH background. The newest upload becomes the active background.</p>
+<input id="heroFile" type="file" accept="image/*">
+<button id="heroUpload">Upload Home Background</button>
+<div id="heroStatus" class="status"></div>
+<hr style="border-color:#633d00">
+<h2>📸 Upload Gallery Photo / Video</h2>
+<label for="year" style="display:block;color:#ffd76a;font-weight:700;margin-top:8px">Select Year</label>
+<select id="year" style="width:100%;padding:13px;margin:7px 0;border-radius:9px;border:1px solid #8d5b00;background:#16070b;color:#fff;box-sizing:border-box">
+<option value="2024">2024</option><option value="2025">2025</option><option value="2026" selected>2026</option>
+</select>
+<input id="file" type="file" accept="image/*,video/*" required>
+<input id="title" placeholder="Title (optional)">
+<button id="upload">Upload to Gallery</button>
+<div id="status" class="status"></div>
+<hr style="border-color:#633d00">
+<h2>🤝 Sponsors / Supporters</h2>
+<p style="color:#e8c9b0">Enter <b>one sponsor name per line</b>. Save once; the website updates automatically.</p>
+<textarea id="sponsors" rows="10" placeholder="Sponsor Name 1&#10;Sponsor Name 2&#10;Sponsor Name 3"></textarea>
+<button id="saveSponsors">Save Sponsor Names</button>
+<div id="sponsorStatus" class="status"></div>
+<hr style="border-color:#633d00">
+<h2>Uploaded files</h2><div id="files"></div>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script>
 <script>
@@ -17,7 +41,33 @@ const sb=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);con
 async function refresh(){const {data:{session}}=await sb.auth.getSession();const ok=session?.user?.id===window.ADMIN_UID; $('login').classList.toggle('hidden',!!session);$('logout').classList.toggle('hidden',!session);$('panel').classList.toggle('hidden',!ok);$('who').textContent=session?(ok?'Admin authenticated.':'This account is not authorised.'):'Please login.';if(ok) list();}
 $('login').onsubmit=async e=>{e.preventDefault();$('who').textContent='Logging in…';const {error}=await sb.auth.signInWithPassword({email:$('email').value,password:$('password').value});$('who').textContent=error?error.message:'';await refresh();};
 $('logout').onclick=async()=>{await sb.auth.signOut();await refresh();};
-$('upload').onclick=async()=>{const f=$('file').files[0];if(!f)return;$('status').textContent='Uploading…';const safe=(f.name||'file').replace(/[^a-zA-Z0-9._-]/g,'_');const stamp=new Date().toISOString().replace(/[:.]/g,'-');const path=`2026-${stamp}-${safe}`;const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type,upsert:false});$('status').textContent=error?error.message:'Uploaded successfully ✅';if(!error){$('file').value='';$('title').value='';list();}};
+$('upload').onclick=async()=>{const f=$('file').files[0];if(!f)return;$('status').textContent='Uploading…';const safe=(f.name||'file').replace(/[^a-zA-Z0-9._-]/g,'_');const stamp=new Date().toISOString().replace(/[:.]/g,'-');const year=$('year').value;const path=`${year}-${stamp}-${safe}`;const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type,upsert:false});$('status').textContent=error?error.message:'Uploaded successfully ✅';if(!error){$('file').value='';$('title').value='';list();}};
+$('heroUpload').onclick=async()=>{const f=$('heroFile').files[0];if(!f){$('heroStatus').textContent='Select a background photo first.';return;}$('heroStatus').textContent='Uploading background…';const safe=(f.name||'background.jpg').replace(/[^a-zA-Z0-9._-]/g,'_');const stamp=new Date().toISOString().replace(/[:.]/g,'-');const path=`hero/${stamp}-${safe}`;const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type,upsert:false});$('heroStatus').textContent=error?error.message:'Home background uploaded successfully ✅';if(!error)$('heroFile').value='';};
 async function list(){const {data,error}=await sb.storage.from('gallery').list('',{limit:200,sortBy:{column:'created_at',order:'desc'}});$('files').innerHTML=error?'<p>'+error.message+'</p>':(data||[]).map(x=>`<p>${x.name}</p>`).join('');}
+
+async function loadSponsorsAdmin(){
+  const {data,error}=await sb.from('sponsors').select('id,name').order('id',{ascending:true});
+  if(error){$('sponsorStatus').textContent='Sponsors table not ready. Run the supplied SQL setup first.';return;}
+  $('sponsors').value=(data||[]).map(x=>x.name).join('\n');
+}
+$('saveSponsors').onclick=async()=>{
+  const names=[...new Set($('sponsors').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean))];
+  $('sponsorStatus').textContent='Saving sponsors…';
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session?.user?.id || session.user.id!==window.ADMIN_UID){$('sponsorStatus').textContent='Admin login required.';return;}
+  const del=await sb.from('sponsors').delete().not('id','is',null);
+  if(del.error){$('sponsorStatus').textContent=del.error.message;return;}
+  if(names.length){
+    const ins=await sb.from('sponsors').insert(names.map(name=>({name})));
+    if(ins.error){$('sponsorStatus').textContent=ins.error.message;return;}
+  }
+  $('sponsorStatus').textContent=`Saved ${names.length} sponsor name(s) ✅`;
+};
+const oldRefresh=refresh;
+refresh=async function(){
+  await oldRefresh();
+  const {data:{session}}=await sb.auth.getSession();
+  if(session?.user?.id===window.ADMIN_UID) await loadSponsorsAdmin();
+};
 sb.auth.onAuthStateChange(()=>refresh());refresh();
 </script></body></html>
