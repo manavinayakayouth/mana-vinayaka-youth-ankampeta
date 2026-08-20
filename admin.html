@@ -1,199 +1,24 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Admin Studio | Mana Vinayaka Youth</title>
-<style>
-:root{--bg:#08030a;--panel:#140811;--panel2:#1b0b15;--gold:#ffc400;--gold2:#ffdf72;--text:#fff7e8;--muted:#cbb8bd;--line:#5b2a3d;--ok:#39d98a;--danger:#ff6b7a}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#3a061b 0,#12040d 35%,#070207 75%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;min-height:100vh}
-a{color:inherit;text-decoration:none}.shell{width:min(1050px,94%);margin:auto;padding:28px 0 60px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.mark{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#ffc400,#8e001f);box-shadow:0 10px 30px #0008;font-size:23px}.brand b{display:block;color:var(--gold);letter-spacing:.6px}.brand small{color:#d7c0c7}.back{border:1px solid var(--line);padding:10px 14px;border-radius:12px;color:#ffe9ad}
-.card{background:linear-gradient(180deg,#1a0b14ee,#10050ce8);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 18px 55px #0006;margin:16px 0}
-.login-card{max-width:520px;margin:70px auto}.eyebrow{color:var(--gold);font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:.76rem}h1{font-size:clamp(1.8rem,5vw,2.7rem);margin:8px 0;color:#fff}h2{margin:0 0 7px;color:var(--gold2)}p{color:var(--muted);line-height:1.55}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wide{grid-column:1/-1}
-label{display:block;color:#f6d98a;font-weight:800;margin:14px 0 7px}input,select,textarea{width:100%;border:1px solid #6d3449;border-radius:12px;background:#0b0509;color:#fff;padding:13px 14px;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #ffc40018}textarea{min-height:180px;resize:vertical}
-.btn{border:0;border-radius:12px;padding:13px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ffd329,#ffad00);color:#190006}.btn.secondary{background:#24121b;color:#fff;border:1px solid var(--line)}.btn.danger{background:#3a111a;color:#ffb3bd;border:1px solid #7e2939}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.actions .btn{flex:1;min-width:150px}
-.status{margin-top:12px;min-height:20px;color:var(--gold2);font-weight:700}.ok{color:var(--ok)}.err{color:#ff9da9}.hidden{display:none!important}
-.userbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#0d060b;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}.userbar span{color:#dfcbd0;font-size:.9rem;overflow:hidden;text-overflow:ellipsis}
-.drop{border:1px dashed #8d5b00;border-radius:16px;padding:20px;text-align:center;background:#0c0509}.drop input{border:0;background:transparent;padding:8px}.hint{font-size:.85rem;color:#a9969c}
-.year-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.year{border:1px solid #704054;background:#12070d;color:#fff;padding:9px 14px;border-radius:999px;font-weight:900;cursor:pointer}.year.active{background:var(--gold);color:#190006;border-color:var(--gold)}
-.file-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.file{padding:10px 12px;border:1px solid #3e1d2b;border-radius:11px;background:#0c0509;color:#decdd1;font-size:.85rem;word-break:break-word;display:flex;align-items:center;justify-content:space-between;gap:10px}.file .fn{flex:1}.mini{border:1px solid #7e2939;background:#2a0b13;color:#ffb6c0;border-radius:9px;padding:7px 10px;font-weight:900;cursor:pointer}
-footer{text-align:center;color:#8e7b82;font-size:.8rem;margin-top:25px}
-@media(max-width:720px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.shell{padding-top:16px}.top{align-items:flex-start}.file-list{grid-template-columns:1fr}.card{padding:17px}.login-card{margin:35px auto}}
-</style>
-</head>
-<body>
-<div class="shell">
-  <div class="top">
-    <div class="brand"><div class="mark">🕉️</div><div><b>MANA VINAYAKA YOUTH</b><small>ANKAMPETA • ADMIN STUDIO</small></div></div>
-    <a class="back" href="index.html">← Website</a>
-  </div>
-
-  <section id="loginCard" class="card login-card">
-    <div class="eyebrow">Secure Admin</div>
-    <h1>Welcome back</h1>
-    <p>Manage the 2024 • 2025 • 2026 gallery, home background and sponsor names from one place.</p>
-    <form id="loginForm">
-      <label>Email</label><input id="email" type="email" autocomplete="username" placeholder="Admin email" required>
-      <label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Your Supabase password" required>
-      <div class="actions"><button class="btn" type="submit">🔐 Login to Admin</button></div>
-    </form>
-    <div class="actions"><button id="resetBtn" class="btn secondary" type="button">Send password reset email</button></div>
-    <div id="loginStatus" class="status"></div>
-  </section>
-
-  <section id="dashboard" class="hidden">
-    <div class="userbar"><span id="who"></span><button id="logout" class="btn secondary">Logout</button></div>
-
-    <div class="grid">
-      <div class="card">
-        <div class="eyebrow">Home</div><h2>🖼️ Hero Background</h2>
-        <p>Upload one image. The newest image becomes the main website background automatically.</p>
-        <div class="drop"><input id="heroFile" type="file" accept="image/*"><div class="hint">JPG / PNG / WEBP • use a wide photo for best result</div></div>
-        <div class="actions"><button id="heroUpload" class="btn">Upload Background</button></div>
-        <div id="heroStatus" class="status"></div>
-      </div>
-
-      <div class="card">
-        <div class="eyebrow">Gallery</div><h2>📸 Year-wise Upload</h2>
-        <p>Choose a year and upload photos/videos. Visitors will see them grouped under that year.</p>
-        <div class="year-tabs">
-          <button class="year" data-year="2024">2024</button>
-          <button class="year" data-year="2025">2025</button>
-          <button class="year active" data-year="2026">2026</button>
-        </div>
-        <input id="year" type="hidden" value="2026">
-        <label>Photo / Video</label><input id="file" type="file" accept="image/*,video/*">
-        <label>Title (optional)</label><input id="title" maxlength="80" placeholder="e.g. Ganesh Chaturthi – 2026">
-        <div class="actions"><button id="upload" class="btn">Upload to Gallery</button></div>
-        <div id="uploadStatus" class="status"></div>
-      </div>
-
-      <div class="card wide">
-        <div class="eyebrow">Sponsors</div><h2>🤝 Sponsor Names</h2>
-        <p>Only names are shown publicly. Put one name per line. They are saved securely in Supabase Storage and shown in a smooth scrolling sponsor strip.</p>
-        <textarea id="sponsors" placeholder="Sponsor Name 1&#10;Sponsor Name 2&#10;Sponsor Name 3"></textarea>
-        <div class="actions"><button id="saveSponsors" class="btn">Save Sponsor Names</button><button id="reloadSponsors" class="btn secondary">Reload</button></div>
-        <div id="sponsorStatus" class="status"></div><div class="hint">No database table is required for sponsors.</div>
-      </div>
-
-      <div class="card wide">
-        <div class="eyebrow">Storage</div><h2>📂 Uploaded Files</h2>
-        <p>Gallery, hero and sponsor files. You can delete uploaded files here.</p><div class="actions"><button id="refreshFiles" class="btn secondary">Refresh Files</button></div>
-        <div id="files" class="file-list"><div class="file">Loading…</div></div>
-      </div>
-    </div>
-  </section>
-  <footer>Mana Vinayaka Youth – Ankampeta • Admin access is protected by Supabase Authentication.</footer>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
-<script>
-const sb = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-const $ = id => document.getElementById(id);
-const setStatus = (id,msg,type='') => { $(id).textContent=msg; $(id).className='status '+type; };
-
-async function isAdmin(){
-  const {data:{session}} = await sb.auth.getSession();
-  return session?.user?.id === window.ADMIN_UID ? session : null;
-}
-async function refresh(){
-  const session = await isAdmin();
-  $('loginCard').classList.toggle('hidden',!!session);
-  $('dashboard').classList.toggle('hidden',!session);
-  if(session){ $('who').textContent='Signed in as '+session.user.email; await loadSponsors(); await listFiles(); }
-}
-$('loginForm').onsubmit = async e => {
-  e.preventDefault(); setStatus('loginStatus','Signing in…');
-  const {error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
-  if(error){setStatus('loginStatus',error.message,'err');return;}
-  setStatus('loginStatus','Login successful ✅','ok'); await refresh();
-};
-$('resetBtn').onclick=async()=>{
-  const email=$('email').value.trim();
-  if(!email){setStatus('loginStatus','Enter your admin email first.','err');return;}
-  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.href});
-  setStatus('loginStatus',error?error.message:'Password reset email sent. Check your inbox.',''+(error?'err':'ok'));
-};
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Admin Studio | Mana Vinayaka Youth</title><style>
+:root{--bg:#08030a;--panel:#140811;--gold:#ffc400;--text:#fff7e8;--muted:#cbb8bd;--line:#5b2a3d;--ok:#39d98a;--danger:#ff6b7a}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#3a061b,#12040d 35%,#070207 75%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif}.shell{width:min(1050px,94%);margin:auto;padding:22px 0 60px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.brand b{display:block;color:var(--gold)}.brand small{color:#d7c0c7}.back{border:1px solid var(--line);padding:10px 14px;border-radius:12px}.card{background:#140811ee;border:1px solid var(--line);border-radius:20px;padding:20px;margin:16px 0}.login-card{max-width:520px;margin:60px auto}h1,h2{color:#ffd76a}p{color:var(--muted);line-height:1.5}label{display:block;color:#f6d98a;font-weight:800;margin:12px 0 6px}input,textarea{width:100%;border:1px solid #6d3449;border-radius:12px;background:#0b0509;color:#fff;padding:13px;font:inherit}textarea{min-height:150px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.wide{grid-column:1/-1}.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ffd329,#ffad00);color:#190006}.secondary{background:#24121b;color:#fff;border:1px solid var(--line)}.danger{background:#3a111a;color:#ffb3bd;border:1px solid #7e2939}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.actions .btn{flex:1}.status{margin-top:10px;min-height:20px;color:#ffd76a;font-weight:700}.ok{color:var(--ok)}.err{color:#ff9da9}.hidden{display:none!important}.year-tabs{display:flex;gap:8px;margin:10px 0}.year{border:1px solid #704054;background:#12070d;color:#fff;padding:9px 14px;border-radius:999px;font-weight:900}.year.active{background:var(--gold);color:#190006}.file-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}.file{padding:10px;border:1px solid #3e1d2b;border-radius:11px;background:#0c0509;display:flex;justify-content:space-between;gap:8px;align-items:center;word-break:break-word}.file button{flex:0 0 auto}@media(max-width:720px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.file-list{grid-template-columns:1fr}.shell{width:94%}}</style></head><body><div class="shell"><div class="top"><div class="brand"><b>🕉️ MANA VINAYAKA YOUTH</b><small>ANKAMPETA • ADMIN STUDIO</small></div><a class="back" href="index.html">← Website</a></div>
+<section id="loginCard" class="card login-card"><h1>Secure Admin Login</h1><p>Use your Supabase Auth email and password.</p><form id="loginForm"><label>Email</label><input id="email" type="email" required><label>Password</label><input id="password" type="password" required><div class="actions"><button class="btn">🔐 Login</button></div></form><div class="actions"><button id="resetBtn" class="btn secondary" type="button">Reset Password</button></div><div id="loginStatus" class="status"></div></section>
+<section id="dashboard" class="hidden"><div class="card"><span id="who"></span><button id="logout" class="btn secondary" style="float:right">Logout</button></div><div class="grid">
+<div class="card"><h2>🖼️ Home Background</h2><p>Upload one background. The newest one becomes the home background.</p><input id="heroFile" type="file" accept="image/*"><div class="actions"><button id="heroUpload" class="btn">Upload Background</button></div><div id="heroStatus" class="status"></div></div>
+<div class="card"><h2>📸 Year-wise Gallery</h2><div class="year-tabs"><button class="year" data-year="2024">2024</button><button class="year" data-year="2025">2025</button><button class="year active" data-year="2026">2026</button></div><input id="file" type="file" accept="image/*,video/*"><label>Title (optional)</label><input id="title" maxlength="80" placeholder="e.g. Ganesh Chaturthi 2026"><div class="actions"><button id="upload" class="btn">Upload to Gallery</button></div><div id="uploadStatus" class="status"></div></div>
+<div class="card wide"><h2>🤝 Sponsor Names</h2><p>One sponsor per line. Save → website displays them automatically in a scrolling strip.</p><textarea id="sponsors" placeholder="Sponsor Name 1&#10;Sponsor Name 2"></textarea><div class="actions"><button id="saveSponsors" class="btn">Save Sponsor Names</button><button id="reloadSponsors" class="btn secondary">Reload</button></div><div id="sponsorStatus" class="status"></div></div>
+<div class="card wide"><h2>🗑️ Uploaded Files</h2><p>Delete gallery images/videos or old hero backgrounds.</p><div class="actions"><button id="refreshFiles" class="btn secondary">Refresh Files</button></div><div id="files" class="file-list"></div></div>
+</div></section></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>
+const sb=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY),$=id=>document.getElementById(id);let selectedYear='2026';
+function status(id,m,c=''){ $(id).textContent=m;$(id).className='status '+c; }
+async function adminSession(){const {data:{session}}=await sb.auth.getSession();return session&&session.user.id===window.ADMIN_UID?session:null;}
+async function refresh(){const s=await adminSession();$('loginCard').classList.toggle('hidden',!!s);$('dashboard').classList.toggle('hidden',!s);if(s){$('who').textContent='Signed in as '+s.user.email;await loadSponsors();await listFiles();}}
+$('loginForm').onsubmit=async e=>{e.preventDefault();status('loginStatus','Signing in…');const {error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){status('loginStatus',error.message,'err');return}await refresh();};
+$('resetBtn').onclick=async()=>{const email=$('email').value.trim();if(!email){status('loginStatus','Enter email first.','err');return}const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.href});status('loginStatus',error?error.message:'Reset email sent.',''+(error?'err':'ok'));};
 $('logout').onclick=async()=>{await sb.auth.signOut();location.reload();};
-
-document.querySelectorAll('.year').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.year').forEach(x=>x.classList.remove('active')); b.classList.add('active'); $('year').value=b.dataset.year;
-});
-$('upload').onclick=async()=>{
-  const f=$('file').files[0], year=$('year').value;
-  if(!f){setStatus('uploadStatus','Choose a photo or video first.','err');return;}
-  const title=($('title').value.trim()||f.name).replace(/[^a-zA-Z0-9 _-]/g,'').trim().replace(/\s+/g,'-');
-  const ext=(f.name.split('.').pop()||'jpg').toLowerCase();
-  const path=`${year}/${Date.now()}-${title||'memory'}.${ext}`;
-  setStatus('uploadStatus','Uploading '+year+'…');
-  const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type||undefined,upsert:false});
-  if(error){setStatus('uploadStatus',error.message,'err');return;}
-  $('file').value='';$('title').value='';setStatus('uploadStatus',`Uploaded to ${year} ✅`,'ok');await listFiles();
-};
-$('heroUpload').onclick=async()=>{
-  const f=$('heroFile').files[0];
-  if(!f){setStatus('heroStatus','Choose a background image first.','err');return;}
-  const ext=(f.name.split('.').pop()||'jpg').toLowerCase(), path=`hero/${Date.now()}-home.${ext}`;
-  setStatus('heroStatus','Uploading background…');
-  const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type||undefined,upsert:false});
-  if(error){setStatus('heroStatus',error.message,'err');return;}
-  $('heroFile').value='';setStatus('heroStatus','Home background updated ✅','ok');
-};
-async function loadSponsors(){
-  const u=sb.storage.from('gallery').getPublicUrl('sponsors/sponsors.json').data.publicUrl+'?v='+Date.now();
-  try{
-    const res=await fetch(u,{cache:'no-store'});
-    if(!res.ok) throw new Error();
-    const json=await res.json();
-    $('sponsors').value=(json.names||[]).join('
-');
-  }catch(e){
-    $('sponsors').value='';
-  }
-}
+document.querySelectorAll('.year').forEach(b=>b.onclick=()=>{document.querySelectorAll('.year').forEach(x=>x.classList.remove('active'));b.classList.add('active');selectedYear=b.dataset.year;});
+$('upload').onclick=async()=>{const s=await adminSession(),f=$('file').files[0];if(!s){status('uploadStatus','Please login again.','err');return}if(!f){status('uploadStatus','Choose a photo/video.','err');return}const title=($('title').value.trim()||f.name.replace(/\.[^.]+$/,'')).replace(/[^a-zA-Z0-9 _-]/g,'').trim().replace(/\s+/g,'-');const ext=(f.name.split('.').pop()||'jpg').toLowerCase();const path=`${selectedYear}/${Date.now()}-${title||'memory'}.${ext}`;status('uploadStatus','Uploading…');const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type||undefined,upsert:false});if(error){status('uploadStatus',error.message,'err');return}$('file').value='';$('title').value='';status('uploadStatus',`Uploaded to ${selectedYear} ✅`,'ok');await listFiles();};
+$('heroUpload').onclick=async()=>{const s=await adminSession(),f=$('heroFile').files[0];if(!s){status('heroStatus','Please login again.','err');return}if(!f){status('heroStatus','Choose an image.','err');return}const ext=(f.name.split('.').pop()||'jpg').toLowerCase();const path=`hero/${Date.now()}-home.${ext}`;status('heroStatus','Uploading…');const {error}=await sb.storage.from('gallery').upload(path,f,{contentType:f.type||undefined,upsert:false});status('heroStatus',error?error.message:'Home background updated ✅',error?'err':'ok');if(!error){$('heroFile').value='';await listFiles();}};
+async function loadSponsors(){try{const u=sb.storage.from('gallery').getPublicUrl('sponsors/sponsors.json').data.publicUrl+'?v='+Date.now();const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();$('sponsors').value=(j.names||[]).join('\\n');}catch(e){$('sponsors').value='';}}
 $('reloadSponsors').onclick=loadSponsors;
-$('saveSponsors').onclick=async()=>{
-  const session=await isAdmin(); if(!session){setStatus('sponsorStatus','Please login again.','err');return;}
-  const names=[...new Set($('sponsors').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean))];
-  setStatus('sponsorStatus','Saving sponsor names…');
-  const payload=new Blob([JSON.stringify({updated_at:new Date().toISOString(),names})],{type:'application/json'});
-  const path=`sponsors/sponsors-${Date.now()}.json`;
-  const {error}=await sb.storage.from('gallery').upload(path,payload,{contentType:'application/json',upsert:false});
-  if(error){setStatus('sponsorStatus',error.message,'err');return;}
-  setStatus('sponsorStatus',`Saved ${names.length} sponsor name(s) ✅`,'ok');
-  await loadSponsors();
-};
-async function deleteFile(path, label){
-  if(!confirm(`Delete "${label}"? This cannot be undone.`)) return;
-  const {error}=await sb.storage.from('gallery').remove([path]);
-  if(error){alert('Delete failed: '+error.message);return;}
-  await listFiles();
-}
-async function listFiles(){
-  const {data:years,error}=await sb.storage.from('gallery').list('',{limit:200});
-  if(error){$('files').innerHTML='<div class="file">'+error.message+'</div>';return;}
-  const entries=[];
-  for(const y of ['2026','2025','2024']){
-    const r=await sb.storage.from('gallery').list(y,{limit:200,sortBy:{column:'created_at',order:'desc'}});
-    if(!r.error)(r.data||[]).filter(x=>x.name&&/\.(jpg|jpeg|png|webp|gif|avif|mp4|webm|mov|m4v)$/i.test(x.name)).forEach(x=>entries.push({year:y,name:x.name,path:y+'/'+x.name}));
-  }
-  const rootFiles=(years||[]).filter(x=>x.name&&/\.(jpg|jpeg|png|webp|gif|avif|mp4|webm|mov|m4v)$/i.test(x.name));
-  rootFiles.forEach(x=>entries.push({year:'root',name:x.name,path:x.name}));
-  if(!entries.length){$('files').innerHTML='<div class="file">No uploaded media yet.</div>';return;}
-  $('files').innerHTML=entries.map(x=>`<div class="file"><span><b>${x.year}</b> · ${esc(x.name)}</span><button class="btn danger del" data-path="${esc(x.path)}" style="padding:7px 10px;min-width:auto;flex:0">🗑️</button></div>`).join('');
-  document.querySelectorAll('.del').forEach(b=>b.onclick=async()=>{
-    const path=b.dataset.path;
-    if(!confirm('Delete this file?'))return;
-    b.disabled=true;
-    const {error}=await sb.storage.from('gallery').remove([path]);
-    if(error){alert(error.message);b.disabled=false;return;}
-    await listFiles();
-  });
-}
-$('refreshFiles').onclick=listFiles;
-sb.auth.onAuthStateChange(()=>setTimeout(refresh,100));
-refresh();
-</script>
-</body></html>
+$('saveSponsors').onclick=async()=>{const s=await adminSession();if(!s){status('sponsorStatus','Please login again.','err');return}const names=[...new Set($('sponsors').value.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean))];const blob=new Blob([JSON.stringify({names,updated_at:new Date().toISOString()})],{type:'application/json'});status('sponsorStatus','Saving…');const rm=await sb.storage.from('gallery').remove(['sponsors/sponsors.json']);if(rm.error&&rm.error.message!=='The resource was not found'){status('sponsorStatus',rm.error.message,'err');return}const up=await sb.storage.from('gallery').upload('sponsors/sponsors.json',blob,{contentType:'application/json',upsert:false});if(up.error){status('sponsorStatus',up.error.message,'err');return}status('sponsorStatus',`Saved ${names.length} sponsor name(s) ✅`,'ok');};
+async function listFiles(){const out=[];for(const y of ['2026','2025','2024','hero']){const r=await sb.storage.from('gallery').list(y,{limit:200,sortBy:{column:'created_at',order:'desc'}});if(!r.error)(r.data||[]).filter(f=>f.name&&!f.name.startsWith('.')&&(/\.(jpg|jpeg|png|webp|gif|avif|mp4|webm|mov|m4v|json)$/i.test(f.name))).forEach(f=>out.push({path:`${y}/${f.name}`,label:`${y}/${f.name}`}));}if(!out.length){$('files').innerHTML='<div class="file">No uploaded files.</div>';return}$('files').innerHTML=out.filter(x=>!x.path.endsWith('/sponsors.json')).map(x=>`<div class="file"><span>${x.label}</span><button class="btn danger" data-path="${x.path}">🗑️ Delete</button></div>`).join('');document.querySelectorAll('[data-path]').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this file?'))return;b.disabled=true;const r=await sb.storage.from('gallery').remove([b.dataset.path]);if(r.error)alert(r.error.message);await listFiles();});}
+$('refreshFiles').onclick=listFiles;sb.auth.onAuthStateChange(()=>setTimeout(refresh,100));refresh();</script></body></html>

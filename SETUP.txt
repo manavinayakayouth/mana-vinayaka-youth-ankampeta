@@ -1,11 +1,7 @@
-FINAL V2 SETUP
-
-1. Login: Supabase Auth email/password. ADMIN_UID in config.js must match the admin user.
-2. Storage bucket: gallery (PUBLIC).
-3. Existing INSERT/SELECT policy: keep it for gallery uploads/public display.
-4. IMPORTANT: Run STORAGE_DELETE_POLICY.sql once in Supabase SQL Editor to enable Delete.
-5. Sponsors no longer require a database table. Admin saves sponsor names as a JSON file in gallery/sponsors/.
-6. Upload gallery files through Admin > 2024/2025/2026.
-7. Delete gallery/hero/sponsor files from Admin > Uploaded Files.
-8. QR code is not included.
-9. Never put a service_role/secret key in GitHub Pages.
+1. Upload the contents of this ZIP to the same GitHub Pages repository, replacing the old files.
+2. In Supabase SQL Editor, run STORAGE_ADMIN_POLICY.sql once.
+3. Keep the gallery bucket PUBLIC.
+4. Open /admin.html and login with the Supabase Auth admin account.
+5. Upload photos under 2024/2025/2026 and use Delete when needed.
+6. Enter sponsor names one per line and Save Sponsor Names.
+7. Hard-refresh the website after deployment.

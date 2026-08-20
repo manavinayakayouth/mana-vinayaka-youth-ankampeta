@@ -1,0 +1,3 @@
+-- Sponsor names are stored in Storage at gallery/sponsors/sponsors.json.
+-- No sponsors database table is required by this version.
+-- The admin page writes this file and the public website reads it.
