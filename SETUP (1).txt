@@ -1,48 +1,11 @@
-MANA VINAYAKA YOUTH – FINAL ADMIN SETUP
+FINAL V2 SETUP
 
-1) Supabase Authentication
-   - Create/keep the admin user in Authentication > Users.
-   - The authorised admin UUID must match ADMIN_UID in config.js.
-   - Login uses that email + password. The password is NEVER stored in this website.
-   - If you forget it, open admin.html and use “Send password reset email”.
-
-2) Storage bucket
-   - Bucket name: gallery
-   - Keep it PUBLIC if the website should display images without visitor login.
-
-3) Storage policies
-   - Public SELECT/LIST for website visitors:
-       bucket_id = 'gallery'
-     Target roles: anon, authenticated
-   - INSERT for admin:
-       bucket_id = 'gallery' AND auth.uid() = '<ADMIN_UID>'
-     Target role: authenticated
-   - The supplied SPONSORS_SETUP.sql contains sponsor table policies.
-
-4) Gallery
-   - Admin Studio > 2024 / 2025 / 2026 > choose photo/video > Upload.
-   - Files are stored in year folders and displayed grouped by year.
-   - Older flat 2024-/2025-/2026- files remain supported.
-
-5) Home background
-   - Admin Studio > Home Background > Upload Background.
-   - Newest image in gallery/hero/ becomes the hero background automatically.
-
-6) Sponsors
-   - Admin Studio > Sponsor Names.
-   - One name per line > Save Sponsor Names.
-   - Public site shows names in the scrolling sponsor section.
-
-7) GitHub Pages
-   Upload the files from this folder, including:
-      index.html
-      admin.html
-      gallery.js
-      config.js
-      all image assets
-   Do NOT upload any service_role/secret key.
-
-IMPORTANT:
-- The public anon/publishable key is okay in config.js.
-- Never put the Supabase service_role/secret key in GitHub Pages.
-- QR code is intentionally NOT included in this final package.
+1. Login: Supabase Auth email/password. ADMIN_UID in config.js must match the admin user.
+2. Storage bucket: gallery (PUBLIC).
+3. Existing INSERT/SELECT policy: keep it for gallery uploads/public display.
+4. IMPORTANT: Run STORAGE_DELETE_POLICY.sql once in Supabase SQL Editor to enable Delete.
+5. Sponsors no longer require a database table. Admin saves sponsor names as a JSON file in gallery/sponsors/.
+6. Upload gallery files through Admin > 2024/2025/2026.
+7. Delete gallery/hero/sponsor files from Admin > Uploaded Files.
+8. QR code is not included.
+9. Never put a service_role/secret key in GitHub Pages.

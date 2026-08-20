@@ -161,17 +161,23 @@ document.addEventListener('DOMContentLoaded',loadHeroBackground);
 <script>
 async function loadSponsors(){
  const host=document.getElementById('sponsorList'); if(!host)return;
- const {data,error}=await sb.from('sponsors').select('id,name').order('id',{ascending:true});
- if(error){host.innerHTML='<div class="sponsor-empty">Sponsor list will appear here shortly.</div>';console.error(error);return;}
- const names=(data||[]).map(x=>x.name).filter(Boolean);
- if(!names.length){host.innerHTML='<div class="sponsor-empty">Sponsors & supporters will be listed here.</div>';return;}
- const items=names.map(n=>`<div class="sponsor-item">${escapeHtml(n)}</div>`).join('');
- host.innerHTML=`<div class="sponsor-track">${items}${items}</div>`;
- const track=host.querySelector('.sponsor-track');
- let y=0, paused=false, half=track.scrollHeight/2;
- host.addEventListener('mouseenter',()=>paused=true); host.addEventListener('mouseleave',()=>paused=false);
- function step(){ if(!paused && names.length>3){ y+=0.35; if(y>=half)y=0; track.style.transform=`translateY(-${y}px)`; } requestAnimationFrame(step); }
- requestAnimationFrame(step);
+ try{
+   const {data,error}=await sb.storage.from('gallery').list('sponsors',{limit:100,sortBy:{column:'created_at',order:'desc'}});
+   if(error) throw error;
+   const files=(data||[]).filter(x=>x.name && x.name.endsWith('.json'));
+   if(!files.length){host.innerHTML='<div class="sponsor-empty">Sponsors & supporters will be listed here.</div>';return;}
+   const u=sb.storage.from('gallery').getPublicUrl('sponsors/'+files[0].name).data.publicUrl;
+   const res=await fetch(u,{cache:'no-store'}); const json=await res.json();
+   const names=(json.names||[]).map(x=>String(x).trim()).filter(Boolean);
+   if(!names.length){host.innerHTML='<div class="sponsor-empty">Sponsors & supporters will be listed here.</div>';return;}
+   const escapeHtml=s=>s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+   const items=names.map(n=>`<div class="sponsor-item">${escapeHtml(n)}</div>`).join('');
+   host.innerHTML=`<div class="sponsor-track">${items}${items}${items}</div>`;
+   const track=host.querySelector('.sponsor-track'); let y=0,paused=false,half=track.scrollHeight/3;
+   host.addEventListener('mouseenter',()=>paused=true); host.addEventListener('mouseleave',()=>paused=false);
+   function step(){if(!paused&&names.length){y+=0.35;if(y>=half)y=0;track.style.transform=`translateY(-${y}px)`}requestAnimationFrame(step)}
+   requestAnimationFrame(step);
+ }catch(e){host.innerHTML='<div class="sponsor-empty">Sponsor names are being updated.</div>';console.error(e)}
 }
 document.addEventListener('DOMContentLoaded',loadSponsors);
 </script>

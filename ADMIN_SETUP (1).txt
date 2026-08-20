@@ -1,0 +1,7 @@
+ADMIN LOGIN
+User ID: 2026GOD
+Password: @2026Managod
+
+Use DONATE -> Admin Login.
+Note: This is a front-end password gate, not a secure server-side authentication system.
+For a truly secure public admin system, use a backend authentication service.

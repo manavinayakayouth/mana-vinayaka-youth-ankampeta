@@ -17,7 +17,7 @@ label{display:block;color:#f6d98a;font-weight:800;margin:14px 0 7px}input,select
 .userbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#0d060b;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}.userbar span{color:#dfcbd0;font-size:.9rem;overflow:hidden;text-overflow:ellipsis}
 .drop{border:1px dashed #8d5b00;border-radius:16px;padding:20px;text-align:center;background:#0c0509}.drop input{border:0;background:transparent;padding:8px}.hint{font-size:.85rem;color:#a9969c}
 .year-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.year{border:1px solid #704054;background:#12070d;color:#fff;padding:9px 14px;border-radius:999px;font-weight:900;cursor:pointer}.year.active{background:var(--gold);color:#190006;border-color:var(--gold)}
-.file-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.file{padding:10px 12px;border:1px solid #3e1d2b;border-radius:11px;background:#0c0509;color:#decdd1;font-size:.85rem;word-break:break-word}
+.file-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.file{padding:10px 12px;border:1px solid #3e1d2b;border-radius:11px;background:#0c0509;color:#decdd1;font-size:.85rem;word-break:break-word;display:flex;align-items:center;justify-content:space-between;gap:10px}.file .fn{flex:1}.mini{border:1px solid #7e2939;background:#2a0b13;color:#ffb6c0;border-radius:9px;padding:7px 10px;font-weight:900;cursor:pointer}
 footer{text-align:center;color:#8e7b82;font-size:.8rem;margin-top:25px}
 @media(max-width:720px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.shell{padding-top:16px}.top{align-items:flex-start}.file-list{grid-template-columns:1fr}.card{padding:17px}.login-card{margin:35px auto}}
 </style>
@@ -71,15 +71,15 @@ footer{text-align:center;color:#8e7b82;font-size:.8rem;margin-top:25px}
 
       <div class="card wide">
         <div class="eyebrow">Sponsors</div><h2>🤝 Sponsor Names</h2>
-        <p>Only names are shown publicly. Put one name per line. The website displays them in a smooth scrolling sponsor strip.</p>
+        <p>Only names are shown publicly. Put one name per line. They are saved securely in Supabase Storage and shown in a smooth scrolling sponsor strip.</p>
         <textarea id="sponsors" placeholder="Sponsor Name 1&#10;Sponsor Name 2&#10;Sponsor Name 3"></textarea>
         <div class="actions"><button id="saveSponsors" class="btn">Save Sponsor Names</button><button id="reloadSponsors" class="btn secondary">Reload</button></div>
-        <div id="sponsorStatus" class="status"></div>
+        <div id="sponsorStatus" class="status"></div><div class="hint">No database table is required for sponsors.</div>
       </div>
 
       <div class="card wide">
         <div class="eyebrow">Storage</div><h2>📂 Uploaded Files</h2>
-        <p>Latest files in the gallery bucket.</p>
+        <p>Gallery, hero and sponsor files. You can delete uploaded files here.</p><div class="actions"><button id="refreshFiles" class="btn secondary">Refresh Files</button></div>
         <div id="files" class="file-list"><div class="file">Loading…</div></div>
       </div>
     </div>
@@ -142,25 +142,52 @@ $('heroUpload').onclick=async()=>{
   $('heroFile').value='';setStatus('heroStatus','Home background updated ✅','ok');
 };
 async function loadSponsors(){
-  const {data,error}=await sb.from('sponsors').select('id,name').order('id',{ascending:true});
-  if(error){setStatus('sponsorStatus','Sponsors table not ready. Run SPONSORS_SETUP.sql in Supabase SQL Editor.','err');return;}
-  $('sponsors').value=(data||[]).map(x=>x.name).join('\n');
+  const {data,error}=await sb.storage.from('gallery').list('sponsors',{limit:100,sortBy:{column:'created_at',order:'desc'}});
+  if(error){setStatus('sponsorStatus',error.message,'err');return;}
+  const files=(data||[]).filter(x=>x.name && x.name.endsWith('.json'));
+  if(!files.length){$('sponsors').value='';setStatus('sponsorStatus','No sponsor list saved yet. Add names and press Save.');return;}
+  const latest=files[0].name;
+  const {data:u}=sb.storage.from('gallery').getPublicUrl('sponsors/'+latest);
+  try{
+    const res=await fetch(u.publicUrl,{cache:'no-store'});
+    const json=await res.json();
+    $('sponsors').value=(json.names||[]).join('\n');
+    setStatus('sponsorStatus',`Loaded ${json.names?.length||0} sponsor name(s).`,'ok');
+  }catch(e){setStatus('sponsorStatus','Could not read the saved sponsor list.','err');}
 }
 $('reloadSponsors').onclick=loadSponsors;
 $('saveSponsors').onclick=async()=>{
   const session=await isAdmin(); if(!session){setStatus('sponsorStatus','Please login again.','err');return;}
   const names=[...new Set($('sponsors').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean))];
   setStatus('sponsorStatus','Saving sponsor names…');
-  const del=await sb.from('sponsors').delete().not('id','is',null);
-  if(del.error){setStatus('sponsorStatus',del.error.message,'err');return;}
-  if(names.length){const ins=await sb.from('sponsors').insert(names.map(name=>({name})));if(ins.error){setStatus('sponsorStatus',ins.error.message,'err');return;}}
+  const payload=new Blob([JSON.stringify({updated_at:new Date().toISOString(),names})],{type:'application/json'});
+  const path=`sponsors/sponsors-${Date.now()}.json`;
+  const {error}=await sb.storage.from('gallery').upload(path,payload,{contentType:'application/json',upsert:false});
+  if(error){setStatus('sponsorStatus',error.message,'err');return;}
   setStatus('sponsorStatus',`Saved ${names.length} sponsor name(s) ✅`,'ok');
+  await loadSponsors();
 };
-async function listFiles(){
-  const {data,error}=await sb.storage.from('gallery').list('',{limit:200,sortBy:{column:'created_at',order:'desc'}});
-  if(error){$('files').innerHTML='<div class="file">'+error.message+'</div>';return;}
-  $('files').innerHTML=(data||[]).map(x=>`<div class="file">${x.name}</div>`).join('')||'<div class="file">No root files. Year folders are stored separately.</div>';
+async function deleteFile(path, label){
+  if(!confirm(`Delete "${label}"? This cannot be undone.`)) return;
+  const {error}=await sb.storage.from('gallery').remove([path]);
+  if(error){alert('Delete failed: '+error.message);return;}
+  await listFiles();
 }
+async function listFiles(){
+  const years=['2026','2025','2024','hero','sponsors'];
+  let html='';
+  for(const folder of years){
+    const {data,error}=await sb.storage.from('gallery').list(folder,{limit:200,sortBy:{column:'created_at',order:'desc'}});
+    if(error) continue;
+    for(const x of (data||[])){
+      if(!x.name || x.name==='.emptyFolderPlaceholder') continue;
+      const path=`${folder}/${x.name}`;
+      html+=`<div class="file"><span class="fn"><b>${folder}</b> / ${x.name}</span><button class="mini" onclick="deleteFile('${path.replace(/'/g,"\\'")}','${x.name.replace(/'/g,"\\'")}')">Delete</button></div>`;
+    }
+  }
+  $('files').innerHTML=html||'<div class="file">No uploaded files found.</div>';
+}
+$('refreshFiles').onclick=listFiles;
 sb.auth.onAuthStateChange(()=>setTimeout(refresh,100));
 refresh();
 </script>
